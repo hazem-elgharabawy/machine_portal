@@ -1,0 +1,38 @@
+generate_makefile() {
+  local hierarchy=${1:-0}
+  local start_dir="$PWD"
+
+  # Climb up N directories
+  for ((i=0; i<hierarchy; i++)); do
+    start_dir="$(dirname "$start_dir")"
+  done
+
+  # Find all .c files from that root
+  mapfile -t c_files < <(find "$start_dir" -type f -name '*.c')
+
+  # Make each path relative to current dir
+  local rel_paths=()
+  for f in "${c_files[@]}"; do
+    if command -v realpath >/dev/null; then
+      rel_paths+=( "$(realpath --relative-to="$PWD" "$f")" )
+    else
+      rel_paths+=( "${f#$PWD/}" )
+    fi
+  done
+
+  # Strip any leading "./"
+  for i in "${!rel_paths[@]}"; do
+    rel_paths[$i]="${rel_paths[$i]#./}"
+  done
+
+  # Write the Makefile in the current directory
+  cat > Makefile <<EOF
+PULP_APP = test
+
+PULP_APP_SRCS = ${rel_paths[*]}
+
+PULP_CFLAGS = -O3 -DPROFILE
+
+include \$(PULP_SDK_HOME)/install/rules/pulp.mk
+EOF
+}
