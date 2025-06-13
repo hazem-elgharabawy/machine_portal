@@ -4,8 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
-#include <limits.h>
+
 
 // Fixed-point configuration
 #define INT_WIDTH 4

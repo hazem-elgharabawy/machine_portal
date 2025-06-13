@@ -2,26 +2,33 @@
 #define MAIN_H
 
 #include <stdint.h>
+#include "pulp.h"
 #include "fixed.h"
-#include "mat_inv.h"
-#include "YHY.h"
-#include "YHE.h"
-#include "input_data.h"
-#include "output_data.h"
+#include "actuator.h"
 
-#define NUM_THREADS 6
-    #define NUM_ITERATIONS 1000
+#define DATA_SIZE 6240
+#define NUM_THREADS 8
+#define NUM_ITERATIONS 1000
 
-// Function declarations
-// Static function to compare matrices with minimal memory usage
-static inline int8_t compare_matrices(const fixed_point_t* actual, const fixed_point_t* expected, int8_t status) {
-    for (int8_t i = 0; i < FULL_MATRIX_ELEMENTS; ++i) {
-        if (actual[i] != expected[i]) {
-            return -1;
-        }
-    }
-    return status;
-}
+typedef struct {
+    fixed_point_t yhe_1_r;               
+    fixed_point_t yhe_1_i;               
+    fixed_point_t yhe_2_r;              
+    fixed_point_t yhe_2_i;              
+    fixed_point_t yhe_3_r;              
+    fixed_point_t yhe_3_i;              
+} yhe_S;
+
+typedef struct {
+    fixed_point_t yhy_11;               
+    fixed_point_t yhy_12;              
+    fixed_point_t yhy_13;              
+    fixed_point_t yhy_23;              
+    fixed_point_t yhy_33;              
+                 
+} yhy_S;
+
 int main(void);
+
 
 #endif // MAIN_H 
