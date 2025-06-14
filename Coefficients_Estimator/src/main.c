@@ -1,32 +1,25 @@
 #include "../inc/main.h"
 
 
-//////////////////////SHARED STRUCTURES///////////////////////
+//////////////////////////////SHARED STRUCTURES/////////////////////////////
 yhy_S yhy = {0};
 yhe_S yhe = {0};
-//////////////////////SHARED ARRAYS///////////////////////////
+//////////////////////////////SHARED ARRAYS////////////////////////////////
 
-//////////////////////////INPUT ARRAYS////////////////////////
-fixed_point_t xp_r_arr [DATA_SIZE];
-fixed_point_t xp_i_arr [DATA_SIZE];
+//////////////////////////////////YHY/////////////////////////////////////
+static __attribute__((aligned(16))) fixed_point_t y_2_arr  [NUM_THREADS] ;
+static __attribute__((aligned(16))) fixed_point_t y_4_arr  [NUM_THREADS] ;
+static __attribute__((aligned(16))) fixed_point_t y_6_arr  [NUM_THREADS] ;
+static __attribute__((aligned(16))) fixed_point_t y_8_arr  [NUM_THREADS] ;
+static __attribute__((aligned(16))) fixed_point_t y_10_arr [NUM_THREADS] ;
 
-fixed_point_t y_r_arr [DATA_SIZE];
-fixed_point_t y_i_arr [DATA_SIZE];
-
-//////////////////////////YHY/////////////////////////////////
-fixed_point_t y_2_arr  [NUM_THREADS] ;
-fixed_point_t y_4_arr  [NUM_THREADS] ;
-fixed_point_t y_6_arr  [NUM_THREADS] ;
-fixed_point_t y_8_arr  [NUM_THREADS] ;
-fixed_point_t y_10_arr [NUM_THREADS] ;
-
-//////////////////////////YHE///////////////////////////////////
-fixed_point_t yhe_1_r_arr [NUM_THREADS];
-fixed_point_t yhe_1_i_arr [NUM_THREADS];
-fixed_point_t yhe_2_r_arr [NUM_THREADS];
-fixed_point_t yhe_2_i_arr [NUM_THREADS];
-fixed_point_t yhe_3_r_arr [NUM_THREADS];
-fixed_point_t yhe_3_i_arr [NUM_THREADS];
+/////////////////////////////////YHE////////////////////////////////////////
+static __attribute__((aligned(16))) fixed_point_t yhe_1_r_arr [NUM_THREADS];
+static __attribute__((aligned(16))) fixed_point_t yhe_1_i_arr [NUM_THREADS];
+static __attribute__((aligned(16))) fixed_point_t yhe_2_r_arr [NUM_THREADS];
+static __attribute__((aligned(16))) fixed_point_t yhe_2_i_arr [NUM_THREADS];
+static __attribute__((aligned(16))) fixed_point_t yhe_3_r_arr [NUM_THREADS];
+static __attribute__((aligned(16))) fixed_point_t yhe_3_i_arr [NUM_THREADS];
 
 int main(){
 
@@ -41,6 +34,7 @@ int main(){
     y_6_arr[core_id] = 0;
     y_8_arr[core_id] = 0;
     y_10_arr[core_id] = 0;
+
     yhe_1_r_arr[core_id] = 0;
     yhe_1_i_arr[core_id] = 0;
     yhe_2_r_arr[core_id] = 0;
@@ -69,14 +63,21 @@ int main(){
 
         // Perform DPD operation
         actuator_func(&actuator);
+        #ifdef TEST
+        // Update thread-local counters
+            if (abs(yp_r_arr[i] - actuator.out_r) <= MARGIN && abs(yp_i_arr[i
+            ] - actuator.out_i) <= MARGIN) {
+                thread_correct_counts[core_id]++;
+            } else {
+                thread_wrong_counts[core_id]++;
+            }
+        #endif
         
         
         //error for YHE   e = x (pre-distorted) - y (post-distorted) 
         fixed_point_t e_r = xp_r_arr[i] - actuator.out_r;
         fixed_point_t e_i = xp_i_arr[i] - actuator.out_i;
-        
-        
-        
+    
         // Y absolute squared and power 4 for both YHY & YHE 
         fixed_point_t y_2_temp = fixed_mul_4(y_r_temp,y_r_temp, y_i_temp, y_i_temp);
         fixed_point_t y_4_temp = fixed_mul(y_2_temp,y_2_temp);
