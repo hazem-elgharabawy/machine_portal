@@ -36,7 +36,7 @@
 #define DATA_SIZE 6240
 #define NUM_THREADS 8
 #define NUM_ITERATIONS 499
-
+#define MATRIX_SIZE 3
 typedef struct {
     fixed_point_t yhe_1_r;               
     fixed_point_t yhe_1_i;               
