@@ -173,7 +173,7 @@ int main(){
         yhe_3_r += fixed_mul(y_4_temp,temp_r);
         yhe_3_i += fixed_mul(y_4_temp,temp_i);
 
-    #ifdef TEST
+
         ////////////////////////////////////////////YHY check//////////////////////////////////////////////////////////
         if(abs(yhy_11 - yhy_11_arr[i]) >= MARGIN ){
             printf(" %d) yhy 11 is wrong exp = %lf, actual = %lf\n", i, fixed_to_double(yhy_11_arr[i]), fixed_to_double(yhy_11));
@@ -231,7 +231,7 @@ int main(){
             printf(" %d) yhe 3 i is wrong exp = %lf, actual = %lf\n", i, fixed_to_double(yhe_3_i_arr[i]), fixed_to_double(yhe_3_i));
             yhe_3_i_wrong_count++; 
         } else yhe_3_i_correct_count++;
-    #endif // TEST
+
     }
     printf("after for loop\n");
     printf("final YHY values:\n");
@@ -258,7 +258,7 @@ int main(){
 
     Matrix_S yhy_inv = {0};
     
-    int yhy_inv_status = matrix_invert(&yhy_matrix, &yhy_inv);  
+    int yhy_inv_status = mat_inv(&yhy_matrix, &yhy_inv);  
     if (yhy_inv_status != 0) {
         printf("Error: YHY matrix inversion failed (det = 0) \n");
         return yhy_inv_status;
@@ -275,7 +275,7 @@ int main(){
     
 
 
-    #ifdef TEST
+
     printf("after for loop\n");
     printf("Total yhy_11_correct = %d\n", yhy_11_correct_count);
     printf("Total yhy_11_wrong = %d\n",   yhy_11_wrong_count);
@@ -307,6 +307,6 @@ int main(){
     printf("Total wrong = %d\n", total_wrong_count);
 
     //print_analysis_report(&correct_stats, &wrong_stats);
-#endif // TEST
+
     return 0;
 }

@@ -68,7 +68,7 @@
  src/../inc/fixed.h \
  /home/ICer/Desktop/ISOLATION/pulp-runtime/lib/libc/minimal/include/stdlib.h \
  /home/ICer/Desktop/ISOLATION/pulp-runtime/lib/libc/minimal/include/stdio.h \
- src/../inc/actuator.h src/../inc/post_dist_out_i.h \
+ src/../inc/actuator.h src/../inc/mat_inv.h src/../inc/post_dist_out_i.h \
  src/../inc/post_dist_out_r.h src/../inc/sync_pa_out_i.h \
  src/../inc/sync_pa_out_r.h src/../inc/sync_pa_in_i.h \
  src/../inc/sync_pa_in_r.h src/../inc/y_h_e_1_i.h src/../inc/y_h_e_1_r.h \
@@ -213,6 +213,8 @@ src/../inc/fixed.h:
 /home/ICer/Desktop/ISOLATION/pulp-runtime/lib/libc/minimal/include/stdio.h:
 
 src/../inc/actuator.h:
+
+src/../inc/mat_inv.h:
 
 src/../inc/post_dist_out_i.h:
 

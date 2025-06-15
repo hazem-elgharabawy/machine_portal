@@ -1,7 +1,7 @@
 # source /home/ICer/Desktop/ISOLATION/pulp/sim/tcl_files/config/run_and_exit.tcl
 # source /home/ICer/Desktop/ISOLATION/pulp/sim/tcl_files/run.tcl
 # vsim -c -quiet vopt_tb -L models_lib -L vip_lib -t ps "+nowarnTRAN" "+nowarnTSCALE" "+nowarnTFMPC" "+TB_PATH=/home/ICer/Desktop/ISOLATION/pulp/sim/../../fe/tb/" "+UVM_NO_RELNOTES" "+ENTRY_POINT=0x1c008080" -permit_unmatched_virtual_intf "+VSIM_PATH=/home/ICer/Desktop/ISOLATION/pulp/sim" -gUSE_SDVT_SPI=0 -gUSE_SDVT_CPI=0 -gBAUDRATE=115200 -gENABLE_DEV_DPI=0 -gLOAD_L2=JTAG -gUSE_SDVT_I2S=0 
-# Start time: 04:30:44 on Jun 16,2025
+# Start time: 06:40:05 on Jun 16,2025
 # //  Questa Sim-64
 # //  Version 10.7c linux_x86_64 Aug 17 2018
 # //
@@ -85,19 +85,7 @@
 # [pulp_tap_if] WRITE32 burst @1c000c00 for        1024 bytes.
 # [pulp_tap_if] WRITE32 burst @1c001000 for        1024 bytes.
 # [pulp_tap_if] WRITE32 burst @1c001400 for        1024 bytes.
-# [pulp_tap_if] WRITE32 burst @1c001800 for        1024 bytes.
-# [pulp_tap_if] WRITE32 burst @1c001c00 for        1024 bytes.
-# [pulp_tap_if] WRITE32 burst @1c002000 for        1024 bytes.
-# [pulp_tap_if] WRITE32 burst @1c002400 for        1024 bytes.
-# [pulp_tap_if] WRITE32 burst @1c002800 for        1024 bytes.
-# [pulp_tap_if] WRITE32 burst @1c002c00 for        1024 bytes.
-# [pulp_tap_if] WRITE32 burst @1c003000 for        1024 bytes.
-# [pulp_tap_if] WRITE32 burst @1c003400 for        1024 bytes.
-# [pulp_tap_if] WRITE32 burst @1c003800 for        1024 bytes.
-# [pulp_tap_if] WRITE32 burst @1c003c00 for        1024 bytes.
-# [pulp_tap_if] WRITE32 burst @1c004000 for        1024 bytes.
-# [pulp_tap_if] WRITE32 burst @1c004400 for        1024 bytes.
-# [pulp_tap_if] WRITE32 burst @1c004800 for          16 bytes.
+# [pulp_tap_if] WRITE32 burst @1c001800 for         520 bytes.
 # [pulp_tap_if] WRITE32 burst @1c008000 for        1024 bytes.
 # [pulp_tap_if] WRITE32 burst @1c008400 for        1024 bytes.
 # [pulp_tap_if] WRITE32 burst @1c008800 for        1024 bytes.
@@ -107,65 +95,59 @@
 # [pulp_tap_if] WRITE32 burst @1c009800 for        1024 bytes.
 # [pulp_tap_if] WRITE32 burst @1c009c00 for        1024 bytes.
 # [pulp_tap_if] WRITE32 burst @1c00a000 for        1024 bytes.
-# [pulp_tap_if] WRITE32 burst @1c00a400 for        1024 bytes.
-# [pulp_tap_if] WRITE32 burst @1c00a800 for         208 bytes.
-# [TB] 23744901ns - Resuming the CORE
-# [TB] 23803701ns retrying debug reg access
-# [TB] 23833001ns retrying debug reg access
-# [TB] 23862301ns retrying debug reg access
-# [TB] 23891601ns retrying debug reg access
-# [TB] 23920901ns retrying debug reg access
-# [TB] 23950201ns retrying debug reg access
-# [TB] 23979501ns retrying debug reg access
-# [TB] 24008801ns retrying debug reg access
-# [TB] 24038101ns retrying debug reg access
-# [TB] 24067401ns retrying debug reg access
-# [TB] 24096701ns retrying debug reg access
-# [TB] 24126001ns retrying debug reg access
-# [TB] 24155301ns retrying debug reg access
-# [TB] 24184601ns retrying debug reg access
-# [TB] 24213901ns retrying debug reg access
-# [TB] 24243201ns retrying debug reg access
-# [TB] 24272501ns retrying debug reg access
-# [TB] 24301801ns retrying debug reg access
-# [TB] 24331101ns retrying debug reg access
-# [TB] 24360401ns retrying debug reg access
-# [TB] 24389701ns retrying debug reg access
-# [TB] 24419001ns retrying debug reg access
-# [TB] 24448301ns retrying debug reg access
-# [TB] 24477601ns retrying debug reg access
-# [TB] 24506901ns retrying debug reg access
-# [TB] 25065601ns - Waiting for end of computation
+# [pulp_tap_if] WRITE32 burst @1c00a400 for         192 bytes.
+# [TB] 13344001ns - Resuming the CORE
+# [TB] 13402801ns retrying debug reg access
+# [TB] 13432101ns retrying debug reg access
+# [TB] 13461401ns retrying debug reg access
+# [TB] 13490701ns retrying debug reg access
+# [TB] 13520001ns retrying debug reg access
+# [TB] 13549301ns retrying debug reg access
+# [TB] 13578601ns retrying debug reg access
+# [TB] 13607901ns retrying debug reg access
+# [TB] 13637201ns retrying debug reg access
+# [TB] 13666501ns retrying debug reg access
+# [TB] 13695801ns retrying debug reg access
+# [TB] 13725101ns retrying debug reg access
+# [TB] 13754401ns retrying debug reg access
+# [TB] 13783701ns retrying debug reg access
+# [TB] 13813001ns retrying debug reg access
+# [TB] 13842301ns retrying debug reg access
+# [TB] 13871601ns retrying debug reg access
+# [TB] 13900901ns retrying debug reg access
+# [TB] 13930201ns retrying debug reg access
+# [TB] 13959501ns retrying debug reg access
+# [TB] 13988801ns retrying debug reg access
+# [TB] 14018101ns retrying debug reg access
+# [TB] 14047401ns retrying debug reg access
+# [TB] 14076701ns retrying debug reg access
+# [TB] 14106001ns retrying debug reg access
+# [TB] 14664701ns - Waiting for end of computation
 # [STDOUT-CL31_PE0] before for loop
 # [STDOUT-CL31_PE0] after for loop
-# [STDOUT-CL31_PE0] Total yhy_11_correct = 499
-# [STDOUT-CL31_PE0] Total yhy_11_wrong = 0
-# [STDOUT-CL31_PE0] Total yhy_12_correct = 499
-# [STDOUT-CL31_PE0] Total yhy_12_wrong = 0
-# [STDOUT-CL31_PE0] Total yhy_13_correct = 499
-# [STDOUT-CL31_PE0] Total yhy_13_wrong = 0
-# [STDOUT-CL31_PE0] Total yhy_23_correct = 499
-# [STDOUT-CL31_PE0] Total yhy_23_wrong = 0
-# [STDOUT-CL31_PE0] Total yhy_33_correct = 499
-# [STDOUT-CL31_PE0] Total yhy_33_wrong = 0
-# [STDOUT-CL31_PE0] Total yhe_1_r_correct = 499
-# [STDOUT-CL31_PE0] Total yhe_1_r_wrong = 0
-# [STDOUT-CL31_PE0] Total yhe_1_i_correct = 499
-# [STDOUT-CL31_PE0] Total yhe_1_i_wrong = 0
-# [STDOUT-CL31_PE0] Total yhe_2_r_correct = 499
-# [STDOUT-CL31_PE0] Total yhe_2_r_wrong = 0
-# [STDOUT-CL31_PE0] Total yhe_2_i_correct = 499
-# [STDOUT-CL31_PE0] Total yhe_2_i_wrong = 0
-# [STDOUT-CL31_PE0] Total yhe_3_r_correct = 499
-# [STDOUT-CL31_PE0] Total yhe_3_r_wrong = 0
-# [STDOUT-CL31_PE0] Total yhe_3_i_correct = 499
-# [STDOUT-CL31_PE0] Total yhe_3_i_wrong = 0
-# [STDOUT-CL31_PE0] Total correct = 5489
-# [STDOUT-CL31_PE0] Total wrong = 0
-# [TB] 28923701ns - Received status core: 0x00000000
+# [STDOUT-CL31_PE0] final YHY values:
+# [STDOUT-CL31_PE0] yhy_11 = 3.495117
+# [STDOUT-CL31_PE0] yhy_12 = 18.414063
+# [STDOUT-CL31_PE0] yhy_13 = 7.491211
+# [STDOUT-CL31_PE0] yhy_23 = 3.997070
+# [STDOUT-CL31_PE0] yhy_33 = 2.587891
+# [STDOUT-CL31_PE0] final YHE values:
+# [STDOUT-CL31_PE0] yhe_1_r = -1.938477
+# [STDOUT-CL31_PE0] yhe_1_i = -8.983398
+# [STDOUT-CL31_PE0] yhe_2_r = -0.956055
+# [STDOUT-CL31_PE0] yhe_2_i = -3.379883
+# [STDOUT-CL31_PE0] yhe_3_r = -0.566406
+# [STDOUT-CL31_PE0] yhe_3_i = -1.716797
+# [STDOUT-CL31_PE0] YHY matrix inversion successful
+# [STDOUT-CL31_PE0] yhy_inv.a11 = -0.003906
+# [STDOUT-CL31_PE0] yhy_inv.a12 = -0.002930
+# [STDOUT-CL31_PE0] yhy_inv.a13 = -0.001953
+# [STDOUT-CL31_PE0] yhy_inv.a23 = -0.001953
+# [STDOUT-CL31_PE0] yhy_inv.a33 = -0.002930
+# [TB] 17487701ns - Received status core: 0x00000000
 # ** Note: $stop    : /home/ICer/Desktop/ISOLATION/pulp/rtl/tb/tb_pulp.sv(1008)
-#    Time: 28923701 ns  Iteration: 0  Instance: /tb_pulp
+#    Time: 17487701 ns  Iteration: 0  Instance: /tb_pulp
 # Break at /home/ICer/Desktop/ISOLATION/pulp/rtl/tb/tb_pulp.sv line 1008
 # Stopped at /home/ICer/Desktop/ISOLATION/pulp/rtl/tb/tb_pulp.sv line 1008
-# End time: 04:36:23 on Jun 16,2025, Elapsed time: 0:05:39
+# End time: 06:43:19 on Jun 16,2025, Elapsed time: 0:03:14
 # Errors: 4, Warnings: 12

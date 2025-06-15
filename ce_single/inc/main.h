@@ -5,7 +5,7 @@
 #include "pulp.h"
 #include "fixed.h"
 #include "actuator.h"
-
+#include "mat_inv.h"
 
 //#define TEST
 //#ifdef TEST

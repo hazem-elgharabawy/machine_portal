@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "fixed.h"
-#include "main.h"
+
 
 // Optimized actuator structure with packed alignment
 typedef struct {

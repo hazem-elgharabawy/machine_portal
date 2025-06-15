@@ -1,6 +1,6 @@
 PULP_APP = test
 
-PULP_APP_SRCS = src/main.c src/actuator.c src/perf_cnt.c
+PULP_APP_SRCS = src/main.c src/actuator.c src/perf_cnt.c src/mat_inv.c
 
 PULP_CFLAGS = -O3 -DPROFILE
 

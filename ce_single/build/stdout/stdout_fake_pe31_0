@@ -1,26 +1,21 @@
 before for loop
 after for loop
-Total yhy_11_correct = 499
-Total yhy_11_wrong = 0
-Total yhy_12_correct = 499
-Total yhy_12_wrong = 0
-Total yhy_13_correct = 499
-Total yhy_13_wrong = 0
-Total yhy_23_correct = 499
-Total yhy_23_wrong = 0
-Total yhy_33_correct = 499
-Total yhy_33_wrong = 0
-Total yhe_1_r_correct = 499
-Total yhe_1_r_wrong = 0
-Total yhe_1_i_correct = 499
-Total yhe_1_i_wrong = 0
-Total yhe_2_r_correct = 499
-Total yhe_2_r_wrong = 0
-Total yhe_2_i_correct = 499
-Total yhe_2_i_wrong = 0
-Total yhe_3_r_correct = 499
-Total yhe_3_r_wrong = 0
-Total yhe_3_i_correct = 499
-Total yhe_3_i_wrong = 0
-Total correct = 5489
-Total wrong = 0
+final YHY values:
+yhy_11 = 3.495117
+yhy_12 = 18.414063
+yhy_13 = 7.491211
+yhy_23 = 3.997070
+yhy_33 = 2.587891
+final YHE values:
+yhe_1_r = -1.938477
+yhe_1_i = -8.983398
+yhe_2_r = -0.956055
+yhe_2_i = -3.379883
+yhe_3_r = -0.566406
+yhe_3_i = -1.716797
+YHY matrix inversion successful
+yhy_inv.a11 = -0.003906
+yhy_inv.a12 = -0.002930
+yhy_inv.a13 = -0.001953
+yhy_inv.a23 = -0.001953
+yhy_inv.a33 = -0.002930
