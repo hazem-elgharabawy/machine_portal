@@ -173,6 +173,7 @@ int main(){
         yhe_3_r += fixed_mul(y_4_temp,temp_r);
         yhe_3_i += fixed_mul(y_4_temp,temp_i);
 
+    #ifdef TEST
         ////////////////////////////////////////////YHY check//////////////////////////////////////////////////////////
         if(abs(yhy_11 - yhy_11_arr[i]) >= MARGIN ){
             printf(" %d) yhy 11 is wrong exp = %lf, actual = %lf\n", i, fixed_to_double(yhy_11_arr[i]), fixed_to_double(yhy_11));
@@ -230,9 +231,51 @@ int main(){
             printf(" %d) yhe 3 i is wrong exp = %lf, actual = %lf\n", i, fixed_to_double(yhe_3_i_arr[i]), fixed_to_double(yhe_3_i));
             yhe_3_i_wrong_count++; 
         } else yhe_3_i_correct_count++;
-
+    #endif // TEST
     }
-        
+    printf("after for loop\n");
+    printf("final YHY values:\n");
+    printf("yhy_11 = %lf\n", fixed_to_double(yhy_11));
+    printf("yhy_12 = %lf\n", fixed_to_double(yhy_12));
+    printf("yhy_13 = %lf\n", fixed_to_double(yhy_13));
+    printf("yhy_23 = %lf\n", fixed_to_double(yhy_23));
+    printf("yhy_33 = %lf\n", fixed_to_double(yhy_33));
+    printf("final YHE values:\n");
+    printf("yhe_1_r = %lf\n", fixed_to_double(yhe_1_r));
+    printf("yhe_1_i = %lf\n", fixed_to_double(yhe_1_i));
+    printf("yhe_2_r = %lf\n", fixed_to_double(yhe_2_r));
+    printf("yhe_2_i = %lf\n", fixed_to_double(yhe_2_i));
+    printf("yhe_3_r = %lf\n", fixed_to_double(yhe_3_r));
+    printf("yhe_3_i = %lf\n", fixed_to_double(yhe_3_i));
+
+    // After we calculated all the YHY and YHE values we invert YHY
+    Matrix_S yhy_matrix = {0};
+    yhy_matrix.a11 = yhy_11;
+    yhy_matrix.a12 = yhy_12;
+    yhy_matrix.a13 = yhy_13;
+    yhy_matrix.a23 = yhy_23;
+    yhy_matrix.a33 = yhy_33;
+
+    Matrix_S yhy_inv = {0};
+    
+    int yhy_inv_status = matrix_invert(&yhy_matrix, &yhy_inv);  
+    if (yhy_inv_status != 0) {
+        printf("Error: YHY matrix inversion failed (det = 0) \n");
+        return yhy_inv_status;
+    }else
+    {
+        printf("YHY matrix inversion successful\n");
+        printf("yhy_inv.a11 = %lf\n", fixed_to_double(yhy_inv.a11));
+        printf("yhy_inv.a12 = %lf\n", fixed_to_double(yhy_inv.a12));
+        printf("yhy_inv.a13 = %lf\n", fixed_to_double(yhy_inv.a13));
+        printf("yhy_inv.a23 = %lf\n", fixed_to_double(yhy_inv.a23));
+        printf("yhy_inv.a33 = %lf\n", fixed_to_double(yhy_inv.a33));
+    }
+    
+    
+
+
+    #ifdef TEST
     printf("after for loop\n");
     printf("Total yhy_11_correct = %d\n", yhy_11_correct_count);
     printf("Total yhy_11_wrong = %d\n",   yhy_11_wrong_count);
@@ -244,8 +287,6 @@ int main(){
     printf("Total yhy_23_wrong = %d\n",   yhy_23_wrong_count);
     printf("Total yhy_33_correct = %d\n", yhy_33_correct_count);
     printf("Total yhy_33_wrong = %d\n",   yhy_33_wrong_count);
-    
-    
     
     printf("Total yhe_1_r_correct = %d\n", yhe_1_r_correct_count);
     printf("Total yhe_1_r_wrong = %d\n",   yhe_1_r_wrong_count);
@@ -265,8 +306,7 @@ int main(){
     printf("Total correct = %d\n", total_correct_count);
     printf("Total wrong = %d\n", total_wrong_count);
 
-    
     //print_analysis_report(&correct_stats, &wrong_stats);
-
+#endif // TEST
     return 0;
 }

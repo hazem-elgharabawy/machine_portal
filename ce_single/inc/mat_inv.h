@@ -8,9 +8,9 @@
 
 // Optimized actuator structure with packed alignment
 typedef struct {
-    fixed_point_t a11;               // Input values
-    fixed_point_t a21, a22;             
-    fixed_point_t a31, a32, a33;              // Coefficients
+    fixed_point_t a11, a12, a13;               // Input values
+    fixed_point_t a22, a23;             
+    fixed_point_t a33;              // Coefficients
 } Matrix_S;
 
 // Main function declaration
