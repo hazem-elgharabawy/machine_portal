@@ -233,13 +233,9 @@ int main(){
         } else yhe_3_i_correct_count++;
 
     }
+
     printf("after for loop\n");
-    printf("final YHY values:\n");
-    printf("yhy_11 = %lf\n", fixed_to_double(yhy_11));
-    printf("yhy_12 = %lf\n", fixed_to_double(yhy_12));
-    printf("yhy_13 = %lf\n", fixed_to_double(yhy_13));
-    printf("yhy_23 = %lf\n", fixed_to_double(yhy_23));
-    printf("yhy_33 = %lf\n", fixed_to_double(yhy_33));
+
     printf("final YHE values:\n");
     printf("yhe_1_r = %lf\n", fixed_to_double(yhe_1_r));
     printf("yhe_1_i = %lf\n", fixed_to_double(yhe_1_i));
@@ -248,6 +244,13 @@ int main(){
     printf("yhe_3_r = %lf\n", fixed_to_double(yhe_3_r));
     printf("yhe_3_i = %lf\n", fixed_to_double(yhe_3_i));
 
+    printf("final YHY values:\n");
+    printf("yhy_11 = %lf\n", fixed_to_double(yhy_11));
+    printf("yhy_12 = %lf\n", fixed_to_double(yhy_12));
+    printf("yhy_13 = %lf\n", fixed_to_double(yhy_13));
+    printf("yhy_23 = %lf\n", fixed_to_double(yhy_23));
+    printf("yhy_33 = %lf\n", fixed_to_double(yhy_33));
+    
     // After we calculated all the YHY and YHE values we invert YHY
     Matrix_S yhy_matrix = {0};
     yhy_matrix.a11 = yhy_11;
@@ -271,12 +274,54 @@ int main(){
         printf("yhy_inv.a23 = %lf\n", fixed_to_double(yhy_inv.a23));
         printf("yhy_inv.a33 = %lf\n", fixed_to_double(yhy_inv.a33));
     }
+
+    // place the YHE values in a matrix
+
+/*
+*********************************************************************************************************
+yhe_mat is a 3x1 matrix with the following structure:
+
+hye_mat =  
+    | yhe1r + yhe1i |
+    | yhe2r + yhe2i |
+    | yhe3r + yhe3i |
+                    3x1 matrix
+
+
+HOWEVER  we will save it in a 3x3 symmetric matrix just to use the same structure Matrix_S for simplicity
+    | yhe1r |  | yhe1i |  | yhe2r |
+    | yhe1i |  | yhe2i |  | yhe3r |
+    | yhe2r |  | yhe3r |  | yhe3i |
+where:
+    yhe_mat-> a11 = yhe1r
+    yhe_mat-> a12 = yhe1i               *****THIS DOES NOT HAVE ANY MEANING, IT IS JUST A PLACEHOLDER*****
+    yhe_mat-> a13 = yhe2r
+    yhe_mat-> a22 = yhe2i
+    yhe_mat-> a23 = yhe3r
+    yhe_mat-> a33 = yhe3i
+************************************************************************************************************
+*/
+    Matrix_S yhe_mat = {0};
+    yhe_mat.a11 = yhe_1_r;
+    yhe_mat.a12 = yhe_1_i;
+    yhe_mat.a13 = yhe_2_r;
+    yhe_mat.a22 = yhe_2_i;
+    yhe_mat.a23 = yhe_3_r;
+    yhe_mat.a33 = yhe_3_i;
+
+    //update coefficients of the distorter
+    coeff_update(&yhy_inv, &yhe_mat, &actuator);
+
+    printf("after coeff_update\n");
+    printf("actuator.a10_r = %lf\n", fixed_to_double(actuator.a10_r));  
+    printf("actuator.a10_i = %lf\n", fixed_to_double(actuator.a10_i));
+    printf("actuator.a30_r = %lf\n", fixed_to_double(actuator.a30_r));
+    printf("actuator.a30_i = %lf\n", fixed_to_double(actuator.a30_i));
+    printf("actuator.a50_r = %lf\n", fixed_to_double(actuator.a50_r));
+    printf("actuator.a50_i = %lf\n", fixed_to_double(actuator.a50_i));
+
     
-    
-
-
-
-    printf("after for loop\n");
+    #ifdef TEST
     printf("Total yhy_11_correct = %d\n", yhy_11_correct_count);
     printf("Total yhy_11_wrong = %d\n",   yhy_11_wrong_count);
     printf("Total yhy_12_correct = %d\n", yhy_12_correct_count);
@@ -307,6 +352,6 @@ int main(){
     printf("Total wrong = %d\n", total_wrong_count);
 
     //print_analysis_report(&correct_stats, &wrong_stats);
-
+    #endif // TEST
     return 0;
 }

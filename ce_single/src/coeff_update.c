@@ -37,7 +37,7 @@ where:
 
 
 
-int8_t coeff_update(const Matrix_S* yhy_inv,const Matrix_S* yhe_mat, Actuator_S* actuator){
+void coeff_update(const Matrix_S* yhy_inv,const Matrix_S* yhe_mat, Actuator_S* actuator){
     // a10_r        +=           inv11 * yhe_1_r             +               inv12 * yhe_2_r         +       inv13 * yhe_3_r
     actuator->a10_r += fixed_mul(yhy_inv->a11, yhe_mat->a11) + fixed_mul(yhy_inv->a12, yhe_mat->a13) + fixed_mul(yhy_inv->a13, yhe_mat->a23);
     
@@ -55,6 +55,5 @@ int8_t coeff_update(const Matrix_S* yhy_inv,const Matrix_S* yhe_mat, Actuator_S*
     
     // a50_i        +=           inv13 * yhe_1_i             +               inv23 * yhe_2_i         +       inv33 * yhe_3_i
     actuator->a50_i += fixed_mul(yhy_inv->a13, yhe_mat->a12) + fixed_mul(yhy_inv->a23, yhe_mat->a22) + fixed_mul(yhy_inv->a33, yhe_mat->a33);
-    
-    return 0; 
+
 }

@@ -10,6 +10,6 @@
 struct Matrix_S;
 
 // Main function declaration
-int8_t coeff_update(const Matrix_S* yhy_inv, Matrix_S* yhe_mat, Actuator_S* actuator);
+void coeff_update(const Matrix_S* yhy_inv, Matrix_S* yhe_mat, Actuator_S* actuator);
 
 #endif // MAT_INV_H
