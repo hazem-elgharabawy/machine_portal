@@ -1,0 +1,194 @@
+# source /home/ICer/Desktop/ISOLATION/pulp/sim/tcl_files/config/run_and_exit.tcl
+# source /home/ICer/Desktop/ISOLATION/pulp/sim/tcl_files/run.tcl
+# vsim -c -quiet vopt_tb -L models_lib -L vip_lib -t ps "+nowarnTRAN" "+nowarnTSCALE" "+nowarnTFMPC" "+TB_PATH=/home/ICer/Desktop/ISOLATION/pulp/sim/../../fe/tb/" "+UVM_NO_RELNOTES" "+ENTRY_POINT=0x1c008080" -permit_unmatched_virtual_intf "+VSIM_PATH=/home/ICer/Desktop/ISOLATION/pulp/sim" -gUSE_SDVT_SPI=0 -gUSE_SDVT_CPI=0 -gBAUDRATE=115200 -gENABLE_DEV_DPI=0 -gLOAD_L2=JTAG -gUSE_SDVT_I2S=0 
+# Start time: 02:05:57 on Jun 18,2025
+# //  Questa Sim-64
+# //  Version 10.7c linux_x86_64 Aug 17 2018
+# //
+# //  Copyright 1991-2018 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# ** Error: (vsim-191) Questa has encountered an unexpected internal error: ../../src/vsim/vsimfunc.c(1989). 
+# Please contact Questa support at http://supportnet.mentor.com
+# ** Error: (vsim-191) Questa has encountered an unexpected internal error: ../../src/vsim/vsimfunc.c(1989). 
+# Please contact Questa support at http://supportnet.mentor.com
+# ** Error: (vsim-191) Questa has encountered an unexpected internal error: ../../src/vsim/vsimfunc.c(1989). 
+# Please contact Questa support at http://supportnet.mentor.com
+# ** Error: (vsim-191) Questa has encountered an unexpected internal error: ../../src/vsim/vsimfunc.c(1989). 
+# Please contact Questa support at http://supportnet.mentor.com
+# ** Warning: (vsim-3770) Failed to find user specified function 'jtag_tick' in DPI C/C++ source files.
+#    Time: 0 ps  Iteration: 0  Region: /SimJTAG_sv_unit File: /home/ICer/Desktop/ISOLATION/pulp/rtl/tb/SimJTAG.sv
+# ** Warning: (vsim-8683) Uninitialized out port /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/i_clk_rst_gen/i_fll_soc/i_FLL_digital/TQ has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/i_clk_rst_gen/i_fll_soc/i_FLL_digital/JTQ has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/i_clk_rst_gen/i_fll_per/i_FLL_digital/TQ has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/i_clk_rst_gen/i_fll_per/i_FLL_digital/JTQ has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/i_clk_rst_gen/i_fll_cluster/i_FLL_digital/TQ has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/i_clk_rst_gen/i_fll_cluster/i_FLL_digital/JTQ has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-3040) Command line generic/parameter "USE_SDVT_I2S" not found in design.
+# ** Warning: (vsim-3040) Command line generic/parameter "USE_SDVT_SPI" not found in design.
+#  run_and_exit
+# [CORE] Core settings: PULP_SECURE =           1, N_PMP_ENTRIES =          16, N_PMP_CFG           4
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 0  Process: /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/fc_subsystem_i/FC_CORE/lFC_CORE/RISCY_PMP/pmp_unit_i/<anonymous> File: /home/ICer/Desktop/ISOLATION/pulp/.bender/git/checkouts/cv32e40p-8612d8ee9a9ea71e/rtl/riscv_pmp.sv Line: 677
+# [CORE] Core settings: PULP_SECURE =           0, N_PMP_ENTRIES =          16, N_PMP_CFG           4
+# [CORE] Core settings: PULP_SECURE =           0, N_PMP_ENTRIES =          16, N_PMP_CFG           4
+# [CORE] Core settings: PULP_SECURE =           0, N_PMP_ENTRIES =          16, N_PMP_CFG           4
+# [CORE] Core settings: PULP_SECURE =           0, N_PMP_ENTRIES =          16, N_PMP_CFG           4
+# [CORE] Core settings: PULP_SECURE =           0, N_PMP_ENTRIES =          16, N_PMP_CFG           4
+# [CORE] Core settings: PULP_SECURE =           0, N_PMP_ENTRIES =          16, N_PMP_CFG           4
+# [CORE] Core settings: PULP_SECURE =           0, N_PMP_ENTRIES =          16, N_PMP_CFG           4
+# [CORE] Core settings: PULP_SECURE =           0, N_PMP_ENTRIES =          16, N_PMP_CFG           4
+# [TB]       0ns - Entry point is set to 0x1c008080
+# [TB]       0ns - Asserting hard reset
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 1  Process: /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/fc_subsystem_i/FC_CORE/lFC_CORE/RISCY_PMP/pmp_unit_i/<anonymous> File: /home/ICer/Desktop/ISOLATION/pulp/.bender/git/checkouts/cv32e40p-8612d8ee9a9ea71e/rtl/riscv_pmp.sv Line: 677
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 2  Process: /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/fc_subsystem_i/FC_CORE/lFC_CORE/RISCY_PMP/pmp_unit_i/<anonymous> File: /home/ICer/Desktop/ISOLATION/pulp/.bender/git/checkouts/cv32e40p-8612d8ee9a9ea71e/rtl/riscv_pmp.sv Line: 677
+# [TB]       1ns - Using FLL
+# [TB]       1ns - Not using CAM SDVT
+# Loading default stimuli
+# [JTAG] SoftReset Done(    701ns)
+# [JTAG] Bypass Test Passed (  33301ns)
+# [JTAG] Tap ID: 249511c3 (  43701ns)
+# [JTAG] Tap ID Test PASSED (  43701ns)
+# [test_mode_if]   50301ns - Init
+# [TB]   50301ns - Enabling clock out via jtag
+# [test_mode_if]   51801ns - Setting confreg to value 002.
+# [TB]   51801ns - jtag_conf_reg set to 002
+# [TB]   51801ns - Releasing hard reset
+# [TB]   53401ns - Init PULP TAP
+# [pulp_tap_if] WRITE32 burst @1c008080 for           4 bytes.
+# [TB]   67501ns - Write32 PULP TAP
+# [JTAG] R/W test of L2 succeeded
+# [TB]  177701ns - Halting the Core
+# [TB]  236501ns - Writing the boot address into dpc
+# [TB]  280601ns - Loading L2
+# [JTAG] Loading L2 with pulp tap jtag interface
+# [pulp_tap_if] WRITE32 burst @10000000 for           8 bytes.
+# [pulp_tap_if] WRITE32 burst @1c000000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c000400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c000800 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c000c00 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c001000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c001400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c001800 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c001c00 for          88 bytes.
+# [pulp_tap_if] WRITE32 burst @1c008000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c008400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c008800 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c008c00 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c009000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c009400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c009800 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c009c00 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c00a000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c00a400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c00a800 for         880 bytes.
+# [TB] 15209001ns - Resuming the CORE
+# [TB] 15267801ns retrying debug reg access
+# [TB] 15297101ns retrying debug reg access
+# [TB] 15326401ns retrying debug reg access
+# [TB] 15355701ns retrying debug reg access
+# [TB] 15385001ns retrying debug reg access
+# [TB] 15414301ns retrying debug reg access
+# [TB] 15443601ns retrying debug reg access
+# [TB] 15472901ns retrying debug reg access
+# [TB] 15502201ns retrying debug reg access
+# [TB] 15531501ns retrying debug reg access
+# [TB] 15560801ns retrying debug reg access
+# [TB] 15590101ns retrying debug reg access
+# [TB] 15619401ns retrying debug reg access
+# [TB] 15648701ns retrying debug reg access
+# [TB] 15678001ns retrying debug reg access
+# [TB] 15707301ns retrying debug reg access
+# [TB] 15736601ns retrying debug reg access
+# [TB] 15765901ns retrying debug reg access
+# [TB] 15795201ns retrying debug reg access
+# [TB] 15824501ns retrying debug reg access
+# [TB] 15853801ns retrying debug reg access
+# [TB] 15883101ns retrying debug reg access
+# [TB] 15912401ns retrying debug reg access
+# [TB] 15941701ns retrying debug reg access
+# [TB] 15971001ns retrying debug reg access
+# [TB] 16529701ns - Waiting for end of computation
+# [STDOUT-CL31_PE0] before for loop
+# [STDOUT-CL31_PE0] YHE MATRIX
+# [STDOUT-CL31_PE0] yhe_1_r = -1.938477
+# [STDOUT-CL31_PE0] yhe_1_i = -8.983398
+# [STDOUT-CL31_PE0] yhe_2_r = -0.956055
+# [STDOUT-CL31_PE0] yhe_2_i = -3.379883
+# [STDOUT-CL31_PE0] yhe_3_r = -0.566406
+# [STDOUT-CL31_PE0] yhe_3_i = -1.716797
+# [STDOUT-CL31_PE0] after factoring yhy before mat_inv
+# [STDOUT-CL31_PE0] YHY MATRIX
+# [STDOUT-CL31_PE0] yhy_11 = 16.871094
+# [STDOUT-CL31_PE0] yhy_12 = 4.603516
+# [STDOUT-CL31_PE0] yhy_13 = 1.872070
+# [STDOUT-CL31_PE0] yhy_23 = 0.999023
+# [STDOUT-CL31_PE0] yhy_33 = 0.646484
+# [STDOUT-CL31_PE0] *******************************************************
+# [STDOUT-CL31_PE0] a11_a13 = 31.583008
+# [STDOUT-CL31_PE0] a11_a23 = 16.854492
+# [STDOUT-CL31_PE0] a11_a33 = 10.906250
+# [STDOUT-CL31_PE0] a12_a12 = 21.191406
+# [STDOUT-CL31_PE0] a12_a13 = 8.617188
+# [STDOUT-CL31_PE0] a12_a23 = 4.598633
+# [STDOUT-CL31_PE0] a12_a33 = 2.975586
+# [STDOUT-CL31_PE0] a13_a13 = 3.503906
+# [STDOUT-CL31_PE0] a13_a23 = 1.870117
+# [STDOUT-CL31_PE0] a13_a33 = 1.209961
+# [STDOUT-CL31_PE0] a23_a23 = 0.998047
+# [STDOUT-CL31_PE0] det0 = 16.599609
+# [STDOUT-CL31_PE0] det1 = 31.075195
+# [STDOUT-CL31_PE0] det2 = 16.837891
+# [STDOUT-CL31_PE0] det3 = 13.699219
+# [STDOUT-CL31_PE0] det = 0.538086
+# [STDOUT-CL31_PE0] adj.a11 = 0.211914
+# [STDOUT-CL31_PE0] adj.a12 = -1.105469
+# [STDOUT-CL31_PE0] adj.a22 = 7.402344
+# [STDOUT-CL31_PE0] adj.a13 = 1.094727
+# [STDOUT-CL31_PE0] adj.a23 = 1.094727
+# [STDOUT-CL31_PE0] adj.a33 = 10.391602
+# [STDOUT-CL31_PE0] *******************************************************
+# [STDOUT-CL31_PE0] after mat_inv befor factoring INV 
+# [STDOUT-CL31_PE0] INV MATRIX
+# [STDOUT-CL31_PE0] inv_11 = 0.005859
+# [STDOUT-CL31_PE0] inv_12 = -0.032227
+# [STDOUT-CL31_PE0] inv_13 = 0.031250
+# [STDOUT-CL31_PE0] inv_23 = 0.031250
+# [STDOUT-CL31_PE0] inv_33 = 0.300781
+# [STDOUT-CL31_PE0] after factoring INV after mat_inv
+# [STDOUT-CL31_PE0] INV MATRIX
+# [STDOUT-CL31_PE0] inv_11 = 0.093750
+# [STDOUT-CL31_PE0] inv_12 = -0.515625
+# [STDOUT-CL31_PE0] inv_13 = 0.500000
+# [STDOUT-CL31_PE0] inv_23 = 0.500000
+# [STDOUT-CL31_PE0] inv_33 = 4.812500
+# [STDOUT-CL31_PE0] after coeff_update
+# [STDOUT-CL31_PE0] actuator.a10_r = 1.018555
+# [STDOUT-CL31_PE0] actuator.a10_i = 0.030273
+# [STDOUT-CL31_PE0] actuator.a30_r = -1.929688
+# [STDOUT-CL31_PE0] actuator.a30_i = -5.884766
+# [STDOUT-CL31_PE0] actuator.a50_r = -3.131836
+# [STDOUT-CL31_PE0] actuator.a50_i = -10.833984
+# [TB] 21328801ns - Received status core: 0x00000000
+# ** Note: $stop    : /home/ICer/Desktop/ISOLATION/pulp/rtl/tb/tb_pulp.sv(1008)
+#    Time: 21328801 ns  Iteration: 0  Instance: /tb_pulp
+# Break at /home/ICer/Desktop/ISOLATION/pulp/rtl/tb/tb_pulp.sv line 1008
+# Stopped at /home/ICer/Desktop/ISOLATION/pulp/rtl/tb/tb_pulp.sv line 1008
+# End time: 02:09:39 on Jun 18,2025, Elapsed time: 0:03:42
+# Errors: 4, Warnings: 12
