@@ -2,246 +2,168 @@
 
 int main(){
 
-    fixed_point_t yhy_11_acumalator_arr[SET_SIZE/100] = {0};
-    fixed_point_t yhy_11  = 0;
-    fixed_point_t yhy_12  = 0;
-    fixed_point_t yhy_13  = 0;
-    fixed_point_t yhy_23  = 0;
-    fixed_point_t yhy_33  = 0;
-
-    fixed_point_t yhe_1_r = 0;
-    fixed_point_t yhe_1_i = 0;
-    fixed_point_t yhe_2_r = 0;
-    fixed_point_t yhe_2_i = 0;
-    fixed_point_t yhe_3_r = 0;
-    fixed_point_t yhe_3_i = 0;
-
+    
     Actuator_S actuator = {0};
     actuator.a10_r = double_to_fixed(1);     // (no distortion) for the first block of data  
 
-    printf("before for loop\n");
-    // compute YHY & YHE in the same for loop to remove redundant operations
-    for (int i = 0; i < SET_SIZE; i ++ ) {
+    for (int j = 0; j < NUM_SETS; i++)
+    {
+        fixed_point_t yhy_11_acumalator_arr[SET_SIZE/100] = {0};
+        fixed_point_t yhy_11  = 0;
+        fixed_point_t yhy_12  = 0;
+        fixed_point_t yhy_13  = 0;
+        fixed_point_t yhy_23  = 0;
+        fixed_point_t yhy_33  = 0;
+
+        fixed_point_t yhe_1_r = 0;
+        fixed_point_t yhe_1_i = 0;
+        fixed_point_t yhe_2_r = 0;
+        fixed_point_t yhe_2_i = 0;
+        fixed_point_t yhe_3_r = 0;
+        fixed_point_t yhe_3_i = 0;
+
+        // compute YHY & YHE in the same for loop to remove redundant operations
+        for (int i = 0; i < SET_SIZE; i ++ ) {
+
+            //load from arrays to temp
+            fixed_point_t y_r_temp = y_r_arr[j*SET_SIZE + i];
+            fixed_point_t y_i_temp = y_i_arr[j*SET_SIZE + i];
+
+            fixed_point_t yp_r_temp = yp_r_arr[j*SET_SIZE + i];
+            fixed_point_t yp_i_temp = yp_i_arr[j*SET_SIZE + i];
+
+            fixed_point_t xp_r_temp = xp_r_arr[j*SET_SIZE + i];
+            fixed_point_t xp_i_temp = xp_i_arr[j*SET_SIZE + i];
+
+            ///////////////////////Post Distorter///////////////////////
+
+            // Load input 
+            actuator.in_r = y_r_temp;
+            actuator.in_i = y_i_temp;
         
-        //load from arrays to temp
-        fixed_point_t y_r_temp = y_r_arr[i];
-        fixed_point_t y_i_temp = y_i_arr[i];
+            // Perform DPD operation
+            actuator_func(&actuator);
         
-        fixed_point_t yp_r_temp = yp_r_arr[i];
-        fixed_point_t yp_i_temp = yp_i_arr[i];
+            // Y absolute squared and power 4 for both YHY & YHE
+            fixed_point_t in_r_2 = fixed_mul(y_r_temp,y_r_temp);
+            fixed_point_t in_i_2 = fixed_mul(y_i_temp,y_i_temp);
+            fixed_point_t y_2_temp =  in_r_2 + in_i_2;
+            fixed_point_t y_4_temp = fixed_mul(y_2_temp,y_2_temp);
+
+            // for YHY 
+            fixed_point_t y_6_temp = fixed_mul(y_2_temp,y_4_temp);
+            fixed_point_t y_8_temp = fixed_mul(y_4_temp,y_4_temp);
+            fixed_point_t y_10_temp = fixed_mul(y_4_temp,y_6_temp);
         
-        fixed_point_t xp_r_temp = xp_r_arr[i];
-        fixed_point_t xp_i_temp = xp_i_arr[i];
+            // for YHE
+            //error for YHE   e = x (pre-distorted) - y (post-distorted) 
+            fixed_point_t e_r = xp_r_temp - actuator.out_r;
+            fixed_point_t e_i = xp_i_temp - actuator.out_i;
+
+            // y* e =  (yr - j yi) (er + j ei) = (yr er + yi ei ) + j (yr ei - yi er)
+            fixed_point_t temp_r = fixed_mul(y_r_temp, e_r) + fixed_mul(y_i_temp, e_i); 
+            fixed_point_t temp_i = fixed_mul(y_r_temp, e_i) - fixed_mul(y_i_temp, e_r); 
+
+            // accumulate the YHY and YHE values
+            //YHY
+            yhy_11 += y_2_temp;
+            yhy_12 += y_4_temp;
+            yhy_13 += y_6_temp; 
+            yhy_23 += y_8_temp;
+            yhy_33 += y_10_temp;
+            if (i != 0 && i % 100 == 0) {
+                yhy_11_acumalator_arr[i / 100 - 1] = yhy_11;
+                yhy_11 = 0;
+            }
         
-        ///////////////////////Post Distorter///////////////////////
+
+            //YHE
+            yhe_1_r += temp_r;
+            yhe_1_i += temp_i; 
+            yhe_2_r += fixed_mul(y_2_temp,temp_r);
+            yhe_2_i += fixed_mul(y_2_temp,temp_i);
+            yhe_3_r += fixed_mul(y_4_temp,temp_r);
+            yhe_3_i += fixed_mul(y_4_temp,temp_i);
         
-        // Load input 
-        actuator.in_r = y_r_temp;
-        actuator.in_i = y_i_temp;
+        } // end of SET_SIZE loop
+
+        //divide by 4
+        yhy_11 = yhy_11 >> 2;
+        for (size_t i = 0; i < (SET_SIZE /100); i++)
+        {
+            yhy_11 += yhy_11_acumalator_arr[i] >> 2 ;
+        }  
+
+        // now we have all the YHY and YHE values accumulated
+        // We need to calculate the YHY inverse matrix and the YHE matrix
+
+        /*
+        *********************************************************************************************************
+        yhe_mat is a 3x1 matrix with the following structure:
+
+        hye_mat =  
+        | yhe1r + yhe1i |
+        | yhe2r + yhe2i |
+        | yhe3r + yhe3i |
+                        3x1 matrix
+
+
+        HOWEVER  we will save it in a 3x3 symmetric matrix just to use the same structure Matrix_S for simplicity
+        | yhe1r |  | yhe1i |  | yhe2r |
+        | yhe1i |  | yhe2i |  | yhe3r |
+        | yhe2r |  | yhe3r |  | yhe3i |
+        where:
+        yhe_mat-> a11 = yhe1r
+        yhe_mat-> a12 = yhe1i               *****THIS DOES NOT HAVE ANY MEANING, IT IS JUST A PLACEHOLDER*****
+        yhe_mat-> a13 = yhe2r
+        yhe_mat-> a22 = yhe2i
+        yhe_mat-> a23 = yhe3r
+        yhe_mat-> a33 = yhe3i
+        ************************************************************************************************************
+        */
     
-        // Perform DPD operation
-        actuator_func(&actuator);
+        // YHE matrix
+        // Note: We are using a 3x3 matrix to store the YHE values
+        Matrix_S yhe_mat = {0};
+        yhe_mat.a11 = yhe_1_r;
+        yhe_mat.a12 = yhe_1_i;
+        yhe_mat.a13 = yhe_2_r;
+        yhe_mat.a22 = yhe_2_i;
+        yhe_mat.a23 = yhe_3_r;
+        yhe_mat.a33 = yhe_3_i;
 
-        // Y absolute squared and power 4 for both YHY & YHE
-        fixed_point_t in_r_2 = fixed_mul(y_r_temp,y_r_temp);
-        fixed_point_t in_i_2 = fixed_mul(y_i_temp,y_i_temp);
-        fixed_point_t y_2_temp =  in_r_2 + in_i_2;
-        fixed_point_t y_4_temp = fixed_mul(y_2_temp,y_2_temp);
-        
-        // for YHY 
-        fixed_point_t y_6_temp = fixed_mul(y_2_temp,y_4_temp);
-        fixed_point_t y_8_temp = fixed_mul(y_4_temp,y_4_temp);
-        fixed_point_t y_10_temp = fixed_mul(y_4_temp,y_6_temp);
+        // YHY  matrix
+        // Note: We are using a 3x3 matrix to store the YHY values
+        // The YHY matrix is symmetric, so we only need to store the upper triangular part
+        // NOTE: the YHY values are multiplied by 0.25 (1/4) before inverting 
+        Matrix_S yhy_mat = {0};
+        yhy_mat.a11 = yhy_11 ;           // yhy_11 is already divided by 4 
+        yhy_mat.a12 = (yhy_12 >> 2);
+        yhy_mat.a13 = (yhy_13 >> 2);
+        yhy_mat.a23 = (yhy_23 >> 2);
+        yhy_mat.a33 = (yhy_33 >> 2);
 
-        // for YHE
-        //error for YHE   e = x (pre-distorted) - y (post-distorted) 
-        fixed_point_t e_r = xp_r_temp - actuator.out_r;
-        fixed_point_t e_i = xp_i_temp - actuator.out_i;
         
-        // y* e =  (yr - j yi) (er + j ei) = (yr er + yi ei ) + j (yr ei - yi er)
-        fixed_point_t temp_r = fixed_mul(y_r_temp, e_r) + fixed_mul(y_i_temp, e_i); 
-        fixed_point_t temp_i = fixed_mul(y_r_temp, e_i) - fixed_mul(y_i_temp, e_r); 
-        
-        // accumulate the YHY and YHE values
-        //YHY
-        yhy_11 += y_2_temp;
-        yhy_12 += y_4_temp;
-        yhy_13 += y_6_temp; 
-        yhy_23 += y_8_temp;
-        yhy_33 += y_10_temp;
-        if (i != 0 && i % 100 == 0) {
-            yhy_11_acumalator_arr[i / 100 - 1] = yhy_11;
-            yhy_11 = 0;
+        Matrix_S yhy_inv = {0};
+
+        int yhy_inv_status = mat_inv(&yhy_mat, &yhy_inv);  
+        if (yhy_inv_status != 0) {
+            printf("Error: YHY matrix inversion failed (det = 0) \n");
+            return yhy_inv_status;
         }
 
-        
-        //YHE
-        yhe_1_r += temp_r;
-        yhe_1_i += temp_i; 
-        yhe_2_r += fixed_mul(y_2_temp,temp_r);
-        yhe_2_i += fixed_mul(y_2_temp,temp_i);
-        yhe_3_r += fixed_mul(y_4_temp,temp_r);
-        yhe_3_i += fixed_mul(y_4_temp,temp_i);
+        // Now we have the YHY inverse matrix, we need to scale it by 16
+        yhy_inv.a11 = yhy_inv.a11 << 4; 
+        yhy_inv.a12 = yhy_inv.a12 << 4; 
+        yhy_inv.a13 = yhy_inv.a13 << 4; 
+        yhy_inv.a22 = yhy_inv.a22 << 4; 
+        yhy_inv.a23 = yhy_inv.a23 << 4; 
+        yhy_inv.a33 = yhy_inv.a33 << 4; 
 
-    }
-     //divide by 4
-    yhy_11 = yhy_11 >> 2;
-    for (size_t i = 0; i < (SET_SIZE /100); i++)
-    {
-        yhy_11 += yhy_11_acumalator_arr[i] >> 2 ;
-    }
-    /*
-    printf("final YHE values:\n");
-    printf("yhe_1_r = %lf\n", fixed_to_double(yhe_1_r));
-    printf("yhe_1_i = %lf\n", fixed_to_double(yhe_1_i));
-    printf("yhe_2_r = %lf\n", fixed_to_double(yhe_2_r));
-    printf("yhe_2_i = %lf\n", fixed_to_double(yhe_2_i));
-    printf("yhe_3_r = %lf\n", fixed_to_double(yhe_3_r));
-    printf("yhe_3_i = %lf\n", fixed_to_double(yhe_3_i));
-    printf("final YHE binary values:\n");
-    printf("yhe_1_r =");
-    print_bits(yhe_1_r);
-    printf("yhe_1_i =");
-    print_bits(yhe_1_i);
-    printf("yhe_2_r =");
-    print_bits(yhe_2_r);
-    printf("yhe_2_i =");
-    print_bits(yhe_2_i);
-    printf("yhe_3_r =");
-    print_bits(yhe_3_r);
-    printf("yhe_3_i =");
-    print_bits(yhe_3_i);
+        //update coefficients of the distorter
+        coeff_update(&yhy_inv, &yhe_mat, &actuator);
 
-
-    printf("final YHY values:\n");
-    printf("yhy_11 = %lf\n", fixed_to_double(yhy_11));
-    printf("yhy_12 = %lf\n", fixed_to_double(yhy_12));
-    printf("yhy_13 = %lf\n", fixed_to_double(yhy_13));
-    printf("yhy_23 = %lf\n", fixed_to_double(yhy_23));
-    printf("yhy_33 = %lf\n", fixed_to_double(yhy_33));
-    
-    printf("final YHY binary values:\n");
-    printf("yhy_11 = \n");
-    print_bits(yhy_11);
-    printf("yhy_12 = \n");
-    print_bits(yhy_12);
-    printf("yhy_13 = \n");
-    print_bits(yhy_13);
-    printf("yhy_23 = \n");
-    print_bits(yhy_23);
-    printf("yhy_33 = \n");
-    print_bits(yhy_33);
-    
-*/    
-
-    // now we have all the YHY and YHE values accumulated
-    // We need to calculate the YHY inverse matrix and the YHE matrix
-
-/*
-*********************************************************************************************************
-yhe_mat is a 3x1 matrix with the following structure:
-
-hye_mat =  
-    | yhe1r + yhe1i |
-    | yhe2r + yhe2i |
-    | yhe3r + yhe3i |
-                    3x1 matrix
-
-
-HOWEVER  we will save it in a 3x3 symmetric matrix just to use the same structure Matrix_S for simplicity
-    | yhe1r |  | yhe1i |  | yhe2r |
-    | yhe1i |  | yhe2i |  | yhe3r |
-    | yhe2r |  | yhe3r |  | yhe3i |
-where:
-    yhe_mat-> a11 = yhe1r
-    yhe_mat-> a12 = yhe1i               *****THIS DOES NOT HAVE ANY MEANING, IT IS JUST A PLACEHOLDER*****
-    yhe_mat-> a13 = yhe2r
-    yhe_mat-> a22 = yhe2i
-    yhe_mat-> a23 = yhe3r
-    yhe_mat-> a33 = yhe3i
-************************************************************************************************************
-*/
-    // YHE matrix
-    // Note: We are using a 3x3 matrix to store the YHE values
-    Matrix_S yhe_mat = {0};
-    yhe_mat.a11 = yhe_1_r;
-    yhe_mat.a12 = yhe_1_i;
-    yhe_mat.a13 = yhe_2_r;
-    yhe_mat.a22 = yhe_2_i;
-    yhe_mat.a23 = yhe_3_r;
-    yhe_mat.a33 = yhe_3_i;
-
-    printf("YHE MATRIX\n");
-    printf("yhe_1_r = %lf\n", fixed_to_double(yhe_mat.a11));
-    printf("yhe_1_i = %lf\n", fixed_to_double(yhe_mat.a12));
-    printf("yhe_2_r = %lf\n", fixed_to_double(yhe_mat.a13));
-    printf("yhe_2_i = %lf\n", fixed_to_double(yhe_mat.a22));
-    printf("yhe_3_r = %lf\n", fixed_to_double(yhe_mat.a23));
-    printf("yhe_3_i = %lf\n", fixed_to_double(yhe_mat.a33));
-
-
-    // YHY  matrix
-    // Note: We are using a 3x3 matrix to store the YHY values
-    // The YHY matrix is symmetric, so we only need to store the upper triangular part
-    // NOTE: the YHY values are multiplied by 0.25 (1/4) before inverting 
-    Matrix_S yhy_mat = {0};
-    yhy_mat.a11 = yhy_11 ;           // yhy_11 is already divided by 4 
-    yhy_mat.a12 = (yhy_12 >> 2);
-    yhy_mat.a13 = (yhy_13 >> 2);
-    yhy_mat.a23 = (yhy_23 >> 2);
-    yhy_mat.a33 = (yhy_33 >> 2);
-
-    printf("after factoring yhy before mat_inv\n");
-    printf("YHY MATRIX\n");
-    printf("yhy_11 = %lf\n", fixed_to_double(yhy_mat.a11));
-    printf("yhy_12 = %lf\n", fixed_to_double(yhy_mat.a12));
-    printf("yhy_13 = %lf\n", fixed_to_double(yhy_mat.a13));
-    printf("yhy_23 = %lf\n", fixed_to_double(yhy_mat.a23));
-    printf("yhy_33 = %lf\n", fixed_to_double(yhy_mat.a33));
-printf("*******************************************************\n");
-    Matrix_S yhy_inv = {0};
-    
-    int yhy_inv_status = mat_inv(&yhy_mat, &yhy_inv);  
-    if (yhy_inv_status != 0) {
-        printf("Error: YHY matrix inversion failed (det = 0) \n");
-        return yhy_inv_status;
-    }
-    printf("*******************************************************\n");
-    printf("after mat_inv befor factoring INV \n");
-    printf("INV MATRIX\n");
-    printf("inv_11 = %lf\n", fixed_to_double(yhy_inv.a11));
-    printf("inv_12 = %lf\n", fixed_to_double(yhy_inv.a12));
-    printf("inv_13 = %lf\n", fixed_to_double(yhy_inv.a13));
-    printf("inv_23 = %lf\n", fixed_to_double(yhy_inv.a23));
-    printf("inv_33 = %lf\n", fixed_to_double(yhy_inv.a33));
-
-    // Now we have the YHY inverse matrix, we need to scale it by 16
-    yhy_inv.a11 = yhy_inv.a11 << 4; 
-    yhy_inv.a12 = yhy_inv.a12 << 4; 
-    yhy_inv.a13 = yhy_inv.a13 << 4; 
-    yhy_inv.a22 = yhy_inv.a22 << 4; 
-    yhy_inv.a23 = yhy_inv.a23 << 4; 
-    yhy_inv.a33 = yhy_inv.a33 << 4; 
-
-    printf("after factoring INV after mat_inv\n");
-    printf("INV MATRIX\n");
-    printf("inv_11 = %lf\n", fixed_to_double(yhy_inv.a11));
-    printf("inv_12 = %lf\n", fixed_to_double(yhy_inv.a12));
-    printf("inv_13 = %lf\n", fixed_to_double(yhy_inv.a13));
-    printf("inv_23 = %lf\n", fixed_to_double(yhy_inv.a23));
-    printf("inv_33 = %lf\n", fixed_to_double(yhy_inv.a33));
-
-    //update coefficients of the distorter
-    coeff_update(&yhy_inv, &yhe_mat, &actuator);
-
-
-    printf("after coeff_update\n");
-    printf("actuator.a10_r = %lf\n", fixed_to_double(actuator.a10_r));  
-    printf("actuator.a10_i = %lf\n", fixed_to_double(actuator.a10_i));
-    printf("actuator.a30_r = %lf\n", fixed_to_double(actuator.a30_r));
-    printf("actuator.a30_i = %lf\n", fixed_to_double(actuator.a30_i));
-    printf("actuator.a50_r = %lf\n", fixed_to_double(actuator.a50_r));
-    printf("actuator.a50_i = %lf\n", fixed_to_double(actuator.a50_i));
-
+        printf("Set %d: Coefficients updated:\n", j);
+    } // end of NUM_SETS loop
     return 0;
 }
