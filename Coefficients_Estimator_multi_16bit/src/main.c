@@ -1,4 +1,5 @@
 #include "../inc/main.h"
+#include <math.h>  // Add this for fabs()
 
 Actuator_S global_actuator = {
     .in_r = 0,
@@ -248,43 +249,71 @@ int main(){
             printf("expected a30_i: %lf\n", fixed_to_double(a30_i_arr[j+1]));
             printf("expected a50_r: %lf\n", fixed_to_double(a50_r_arr[j+1]));
             printf("expected a50_i: %lf\n", fixed_to_double(a50_i_arr[j+1]));
-            if (abs(a10_r_arr[j+1] - global_actuator.a10_r) <= MARGIN) {
-                printf("a10_r: correct with error = %lf\n", abs(a10_r_arr[j+1] - global_actuator.a10_r));
+
+            // Convert fixed-point values to double before calculating error
+            double expected_a10_r = fixed_to_double(a10_r_arr[j+1]);
+            double actual_a10_r = fixed_to_double(global_actuator.a10_r);
+            double expected_a10_i = fixed_to_double(a10_i_arr[j+1]);
+            double actual_a10_i = fixed_to_double(global_actuator.a10_i);
+            double expected_a30_r = fixed_to_double(a30_r_arr[j+1]);
+            double actual_a30_r = fixed_to_double(global_actuator.a30_r);
+            double expected_a30_i = fixed_to_double(a30_i_arr[j+1]);
+            double actual_a30_i = fixed_to_double(global_actuator.a30_i);
+            double expected_a50_r = fixed_to_double(a50_r_arr[j+1]);
+            double actual_a50_r = fixed_to_double(global_actuator.a50_r);
+            double expected_a50_i = fixed_to_double(a50_i_arr[j+1]);
+            double actual_a50_i = fixed_to_double(global_actuator.a50_i);
+
+            // Print raw values for debugging
+            printf("\nDebug values:\n");
+            printf("a10_r: expected=%lf, actual=%lf, diff=%lf\n", expected_a10_r, actual_a10_r, expected_a10_r - actual_a10_r);
+            printf("a10_i: expected=%lf, actual=%lf, diff=%lf\n", expected_a10_i, actual_a10_i, expected_a10_i - actual_a10_i);
+            printf("a30_r: expected=%lf, actual=%lf, diff=%lf\n", expected_a30_r, actual_a30_r, expected_a30_r - actual_a30_r);
+            printf("a30_i: expected=%lf, actual=%lf, diff=%lf\n", expected_a30_i, actual_a30_i, expected_a30_i - actual_a30_i);
+            printf("a50_r: expected=%lf, actual=%lf, diff=%lf\n", expected_a50_r, actual_a50_r, expected_a50_r - actual_a50_r);
+            printf("a50_i: expected=%lf, actual=%lf, diff=%lf\n", expected_a50_i, actual_a50_i, expected_a50_i - actual_a50_i);
+            printf("MARGIN=%lf\n", MARGIN);
+
+            if (fabs(expected_a10_r - actual_a10_r) <= MARGIN) {
+                printf("a10_r: correct with error = %lf\n", fabs(expected_a10_r - actual_a10_r));
             } else {
-                printf("a10_r: wrong with error = %lf\n", abs(a10_r_arr[j+1] - global_actuator.a10_r));
+                printf("a10_r: wrong with error = %lf\n", fabs(expected_a10_r - actual_a10_r));
             }
         
-            if (abs(a10_i_arr[j+1] - global_actuator.a10_i) <= MARGIN) {
-                printf("a10_i: correct with error = %lf\n", abs(a10_i_arr[j+1] - global_actuator.a10_i));
+            if (fabs(expected_a10_i - actual_a10_i) <= MARGIN) {
+                printf("a10_i: correct with error = %lf\n", fabs(expected_a10_i - actual_a10_i));
             } else {
-                printf("a10_i: wrong with error = %lf\n", abs(a10_i_arr[j+1] - global_actuator.a10_i));
+                printf("a10_i: wrong with error = %lf\n", fabs(expected_a10_i - actual_a10_i));
             }
         
-            if (abs(a30_r_arr[j+1] - global_actuator.a30_r) <= MARGIN) {
-                printf("a30_r: correct with error = %lf\n", abs(a30_r_arr[j+1] - global_actuator.a30_r));
+            if (fabs(expected_a30_r - actual_a30_r) <= MARGIN) {
+                printf("a30_r: correct with error = %lf\n", fabs(expected_a30_r - actual_a30_r));
             } else {
-                printf("a30_r: wrong with error = %lf\n", abs(a30_r_arr[j+1] - global_actuator.a30_r));
+                printf("a30_r: wrong with error = %lf\n", fabs(expected_a30_r - actual_a30_r));
             }
         
-            if (abs(a30_i_arr[j+1] - global_actuator.a30_i) <= MARGIN) {
-                printf("a30_i: correct with error = %lf\n", abs(a30_i_arr[j+1] - global_actuator.a30_i));
+            if (fabs(expected_a30_i - actual_a30_i) <= MARGIN) {
+                printf("a30_i: correct with error = %lf\n", fabs(expected_a30_i - actual_a30_i));
             } else {
-                printf("a30_i: wrong with error = %lf\n", abs(a30_i_arr[j+1] - global_actuator.a30_i));
+                printf("a30_i: wrong with error = %lf\n", fabs(expected_a30_i - actual_a30_i));
             }
         
-            if (abs(a50_r_arr[j+1] - global_actuator.a50_r) <= MARGIN) {
-                printf("a50_r: correct with error = %lf\n", abs(a50_r_arr[j+1] - global_actuator.a50_r));
+            if (fabs(expected_a50_r - actual_a50_r) <= MARGIN) {
+                printf("a50_r: correct with error = %lf\n", fabs(expected_a50_r - actual_a50_r));
             } else {
-                printf("a50_r: wrong with error = %lf\n", abs(a50_r_arr[j+1] - global_actuator.a50_r));
+                printf("a50_r: wrong with error = %lf\n", fabs(expected_a50_r - actual_a50_r));
             }
-            if (abs(a50_i_arr[j+1] - global_actuator.a50_i) <= MARGIN) {
-                printf("a50_i: correct with error = %lf\n", abs(a50_i_arr[j+1] - global_actuator.a50_i));
+            if (fabs(expected_a50_i - actual_a50_i) <= MARGIN) {
+                printf("a50_i: correct with error = %lf\n", fabs(expected_a50_i - actual_a50_i));
             } else {
-                printf("a50_i: wrong with error = %lf\n", abs(a50_i_arr[j+1] - global_actuator.a50_i));
+                printf("a50_i: wrong with error = %lf\n", fabs(expected_a50_i - actual_a50_i));
             }    
         }
         // synchronize all cores after updating the coefficients
         synch_barrier();
+
+        // Update local actuator with global_actuator values
+        actuator = global_actuator;
 
     } // end of NUM_SETS loop
     
