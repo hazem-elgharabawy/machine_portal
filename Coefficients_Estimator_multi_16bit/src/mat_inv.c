@@ -61,7 +61,20 @@ int8_t mat_inv(const Matrix_S* mat, Matrix_S* inv) {
     
     fixed_point_t a23_a23 = fixed_mul(mat->a23, mat->a23);
 
+    printf("a11_a13 = %lf\n", fixed_to_double(a11_a13));
+    printf("a11_a23 = %lf\n", fixed_to_double(a11_a23));
+    printf("a11_a33 = %lf\n", fixed_to_double(a11_a33));
+    
+    printf("a12_a12 = %lf\n", fixed_to_double(a12_a12));
+    printf("a12_a13 = %lf\n", fixed_to_double(a12_a13));
+    printf("a12_a23 = %lf\n", fixed_to_double(a12_a23));
+    printf("a12_a33 = %lf\n", fixed_to_double(a12_a33));
 
+    printf("a13_a13 = %lf\n", fixed_to_double(a13_a13));
+    printf("a13_a23 = %lf\n", fixed_to_double(a13_a23));
+    printf("a13_a33 = %lf\n", fixed_to_double(a13_a33));
+    
+    printf("a23_a23 = %lf\n", fixed_to_double(a23_a23));
     //det(mat) = a13 * [(a11*a33) + (a12*a23) + (a12*a23) − (a13*a13)] - [a11*a23*a23] - [a33*a12*a12]
     
     fixed_point_t det0 = a11_a33 + a12_a23 + a12_a23 - a13_a13; // [(a11*a33) + (a12*a23) + (a12*a23) − (a13*a13)]
@@ -71,8 +84,8 @@ int8_t mat_inv(const Matrix_S* mat, Matrix_S* inv) {
     
     fixed_point_t det = det1 - det2 - det3;
     
-    //det = det << 6;                                             // multiply the det by factor of 64 as `23's RTL  
-    
+    det = det << 4;                                             // multiply the det by factor of 32 to avoid overflow  
+    printf("det = %lf\n", fixed_to_double(det));
     // Check if determinant is zero
     if (det == 0) {
         return -1; // Matrix is singular, cannot invert
@@ -88,9 +101,15 @@ int8_t mat_inv(const Matrix_S* mat, Matrix_S* inv) {
     adj.a23 =  a12_a13 - a11_a23; 
     adj.a33 =  a11_a13 - a12_a12;
     
-   
+    printf("adj.a11 = %lf\n", fixed_to_double(adj.a11));
+    printf("adj.a12 = %lf\n", fixed_to_double(adj.a12));
+    printf("adj.a22 = %lf\n", fixed_to_double(adj.a22));
+    printf("adj.a13 = %lf\n", fixed_to_double(adj.a13));
+    printf("adj.a23 = %lf\n", fixed_to_double(adj.a23));
+    printf("adj.a33 = %lf\n", fixed_to_double(adj.a33));
+    
     // Compute inverse using adjugate and determinant
-    inv->a11 = fixed_div(adj.a11, det);                 // divide here by 64 instead of multiplying the det by 64 to avoid overflow
+    inv->a11 = fixed_div(adj.a11, det);                 
     inv->a12 = fixed_div(adj.a12, det);    
     inv->a22 = fixed_div(adj.a22, det);
     inv->a13 = fixed_div(adj.a13, det);    

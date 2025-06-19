@@ -1,10 +1,9 @@
 #include "../inc/main.h"
-#include <math.h>  // Add this for fabs()
 
 Actuator_S global_actuator = {
     .in_r = 0,
     .in_i = 0,
-    .a10_r = 1 << FRACT_WIDTH ,    // (no distortion) for the first block of data
+    .a10_r = 1<<FRACT_WIDTH,    // (no distortion) for the first block of data
     .a10_i = 0,
     .a30_r = 0,
     .a30_i = 0,
@@ -43,12 +42,36 @@ int main(){
     printf("Core ID: %d, Number of cores: %d\n", core_id, num_cores);
 
     Actuator_S actuator = {0};
-    actuator = global_actuator;       // use the calculated coefficients
-
+    
     // synchronize all cores before starting the computation
     synch_barrier();
     for (int j = 0; j < NUM_SETS; j++)
     {
+        
+#ifdef USE_SW_COEFFS
+    actuator = global_actuator; // Use the calculated coefficients
+#else
+    #ifdef USE_MATLAB_COEFFS
+        // Load coefficients from MATLAB arrays
+        actuator.a10_r = a10_r_matlab_arr[j];
+        actuator.a10_i = a10_i_matlab_arr[j];
+        actuator.a30_r = a30_r_matlab_arr[j];
+        actuator.a30_i = a30_i_matlab_arr[j];
+        actuator.a50_r = a50_r_matlab_arr[j];
+        actuator.a50_i = a50_i_matlab_arr[j];
+    #else
+        #ifdef USE_HW_COEFFS
+            // Load coefficients from hardware arrays
+            actuator.a10_r = a10_r_hw_arr[j];
+            actuator.a10_i = a10_i_hw_arr[j];
+            actuator.a30_r = a30_r_hw_arr[j];
+            actuator.a30_i = a30_i_hw_arr[j];
+            actuator.a50_r = a50_r_hw_arr[j];
+            actuator.a50_i = a50_i_hw_arr[j];
+        #endif // USE_HW_COEFFS
+    #endif // USE_MATLAB_COEFFS
+#endif // USE_SW_COEFFS
+
         // Initialize accumulators for YHY and YHE
         yhy_11_shared[core_id] = 0;
         yhy_12_shared[core_id] = 0;
@@ -185,13 +208,7 @@ int main(){
                 yhe_mat.a23 += yhe_3_r_shared[k];
                 yhe_mat.a33 += yhe_3_i_shared[k];
             } 
-            printf("YHE MATRIX\n");
-            printf("yhe_1_r  = %lf\n",fixed_to_double(yhe_mat.a11));
-            printf("yhe_1_i  = %lf\n",fixed_to_double(yhe_mat.a12));
-            printf("yhe_2_r  = %lf\n",fixed_to_double(yhe_mat.a13));
-            printf("yhe_2_i  = %lf\n",fixed_to_double(yhe_mat.a22));
-            printf("yhe_3_r  = %lf\n",fixed_to_double(yhe_mat.a23));
-            printf("yhe_3_i  = %lf\n",fixed_to_double(yhe_mat.a33));
+            
             // divide the YHY matrix by 4 (1/4) before inverting it
             // Note: yhy_11 is already divided by 4, so we don't need to divide it again
             yhy_mat.a12 = yhy_mat.a12 >> 2; // divide by 4
@@ -199,12 +216,6 @@ int main(){
             yhy_mat.a23 = yhy_mat.a23 >> 2; // divide by 4
             yhy_mat.a33 = yhy_mat.a33 >> 2; // divide by 4
 
-            printf("YHY MATRIX AFTER THE FACTOR\n");
-            printf("yhy_11  = %lf\n",fixed_to_double(yhy_mat.a11));
-            printf("yhy_12  = %lf\n",fixed_to_double(yhy_mat.a12));
-            printf("yhy_13  = %lf\n",fixed_to_double(yhy_mat.a13));
-            printf("yhy_23  = %lf\n",fixed_to_double(yhy_mat.a23));
-            printf("yhy_33  = %lf\n",fixed_to_double(yhy_mat.a33));
             // Now we have the YHY and YHE matrices, we need to invert the YHY matrix
             
             // Create a matrix for the inverse of YHY            
@@ -216,104 +227,73 @@ int main(){
                 return yhy_inv_status;
             }
 
-
-            // Now we have the YHY inverse matrix, we need to scale it by 0.25
-            yhy_inv.a11 = yhy_inv.a11 >> 2; 
-            yhy_inv.a12 = yhy_inv.a12 >> 2; 
-            yhy_inv.a13 = yhy_inv.a13 >> 2; 
-            yhy_inv.a22 = yhy_inv.a22 >> 2; 
-            yhy_inv.a23 = yhy_inv.a23 >> 2; 
-            yhy_inv.a33 = yhy_inv.a33 >> 2; 
-
-            printf("INV AFTER THE FACTOR\n");
-            printf("inv11  = %lf\n",fixed_to_double(yhy_inv.a11));
-            printf("inv12  = %lf\n",fixed_to_double(yhy_inv.a12));
-            printf("inv13  = %lf\n",fixed_to_double(yhy_inv.a13));
-            printf("inv22  = %lf\n",fixed_to_double(yhy_inv.a22));
-            printf("inv23  = %lf\n",fixed_to_double(yhy_inv.a23));
-            printf("inv33  = %lf\n",fixed_to_double(yhy_inv.a33));
+            // Now we have the YHY inverse matrix, we need to scale it by 4
+            yhy_inv.a11 = yhy_inv.a11 << 2; 
+            yhy_inv.a12 = yhy_inv.a12 << 2; 
+            yhy_inv.a13 = yhy_inv.a13 << 2; 
+            yhy_inv.a22 = yhy_inv.a22 << 2; 
+            yhy_inv.a23 = yhy_inv.a23 << 2; 
+            yhy_inv.a33 = yhy_inv.a33 << 2; 
+            
             //update coefficients of the distorter
             coeff_update(&yhy_inv, &yhe_mat, &global_actuator);
 
-            printf("Set %d: Coefficients updated:\n", (j+1));
-            printf("a10_r: %lf\n", fixed_to_double(global_actuator.a10_r));
-            printf("a10_i: %lf\n", fixed_to_double(global_actuator.a10_i));
-            printf("a30_r: %lf\n", fixed_to_double(global_actuator.a30_r));
-            printf("a30_i: %lf\n", fixed_to_double(global_actuator.a30_i));
-            printf("a50_r: %lf\n", fixed_to_double(global_actuator.a50_r));
-            printf("a50_i: %lf\n", fixed_to_double(global_actuator.a50_i));
+            // Get values for comparison
+            double matlab_a10_r = a10_r_matlab_arr[j+1];
+            double hw_a10_r = fixed_to_double(a10_r_hw_arr[j+1]);
+            double computed_a10_r = fixed_to_double(global_actuator.a10_r);
+            double matlab_a10_i = a10_i_matlab_arr[j+1];
+            double hw_a10_i = fixed_to_double(a10_i_hw_arr[j+1]);
+            double computed_a10_i = fixed_to_double(global_actuator.a10_i);
+            double matlab_a30_r = a30_r_matlab_arr[j+1];
+            double hw_a30_r = fixed_to_double(a30_r_hw_arr[j+1]);
+            double computed_a30_r = fixed_to_double(global_actuator.a30_r);
+            double matlab_a30_i = a30_i_matlab_arr[j+1];
+            double hw_a30_i = fixed_to_double(a30_i_hw_arr[j+1]);
+            double computed_a30_i = fixed_to_double(global_actuator.a30_i);
+            double matlab_a50_r = a50_r_matlab_arr[j+1];
+            double hw_a50_r = fixed_to_double(a50_r_hw_arr[j+1]);
+            double computed_a50_r = fixed_to_double(global_actuator.a50_r);
+            double matlab_a50_i = a50_i_matlab_arr[j+1];
+            double hw_a50_i = fixed_to_double(a50_i_hw_arr[j+1]);
+            double computed_a50_i = fixed_to_double(global_actuator.a50_i);
 
-            printf("expected a10_r: %lf\n", fixed_to_double(a10_r_arr[j+1]));
-            printf("expected a10_i: %lf\n", fixed_to_double(a10_i_arr[j+1]));
-            printf("expected a30_r: %lf\n", fixed_to_double(a30_r_arr[j+1]));
-            printf("expected a30_i: %lf\n", fixed_to_double(a30_i_arr[j+1]));
-            printf("expected a50_r: %lf\n", fixed_to_double(a50_r_arr[j+1]));
-            printf("expected a50_i: %lf\n", fixed_to_double(a50_i_arr[j+1]));
+            // Calculate Mean Square Error (MSE) for all coefficients
+            double mse_computed = 0.0;
+            double mse_hw = 0.0;
+            int num_coeffs = 6; // a10_r, a10_i, a30_r, a30_i, a50_r, a50_i
 
-            // Convert fixed-point values to double before calculating error
-            double expected_a10_r = fixed_to_double(a10_r_arr[j+1]);
-            double actual_a10_r = fixed_to_double(global_actuator.a10_r);
-            double expected_a10_i = fixed_to_double(a10_i_arr[j+1]);
-            double actual_a10_i = fixed_to_double(global_actuator.a10_i);
-            double expected_a30_r = fixed_to_double(a30_r_arr[j+1]);
-            double actual_a30_r = fixed_to_double(global_actuator.a30_r);
-            double expected_a30_i = fixed_to_double(a30_i_arr[j+1]);
-            double actual_a30_i = fixed_to_double(global_actuator.a30_i);
-            double expected_a50_r = fixed_to_double(a50_r_arr[j+1]);
-            double actual_a50_r = fixed_to_double(global_actuator.a50_r);
-            double expected_a50_i = fixed_to_double(a50_i_arr[j+1]);
-            double actual_a50_i = fixed_to_double(global_actuator.a50_i);
+            // MSE between computed and MATLAB values
+            mse_computed += (matlab_a10_r - computed_a10_r) * (matlab_a10_r - computed_a10_r);
+            mse_computed += (matlab_a10_i - computed_a10_i) * (matlab_a10_i - computed_a10_i);
+            mse_computed += (matlab_a30_r - computed_a30_r) * (matlab_a30_r - computed_a30_r);
+            mse_computed += (matlab_a30_i - computed_a30_i) * (matlab_a30_i - computed_a30_i);
+            mse_computed += (matlab_a50_r - computed_a50_r) * (matlab_a50_r - computed_a50_r);
+            mse_computed += (matlab_a50_i - computed_a50_i) * (matlab_a50_i - computed_a50_i);
+            mse_computed /= num_coeffs;
 
-            // Print raw values for debugging
-            printf("\nDebug values:\n");
-            printf("a10_r: expected=%lf, actual=%lf, diff=%lf\n", expected_a10_r, actual_a10_r, expected_a10_r - actual_a10_r);
-            printf("a10_i: expected=%lf, actual=%lf, diff=%lf\n", expected_a10_i, actual_a10_i, expected_a10_i - actual_a10_i);
-            printf("a30_r: expected=%lf, actual=%lf, diff=%lf\n", expected_a30_r, actual_a30_r, expected_a30_r - actual_a30_r);
-            printf("a30_i: expected=%lf, actual=%lf, diff=%lf\n", expected_a30_i, actual_a30_i, expected_a30_i - actual_a30_i);
-            printf("a50_r: expected=%lf, actual=%lf, diff=%lf\n", expected_a50_r, actual_a50_r, expected_a50_r - actual_a50_r);
-            printf("a50_i: expected=%lf, actual=%lf, diff=%lf\n", expected_a50_i, actual_a50_i, expected_a50_i - actual_a50_i);
-            printf("MARGIN=%lf\n", MARGIN);
+            // MSE between hardware and MATLAB values
+            mse_hw += (matlab_a10_r - hw_a10_r) * (matlab_a10_r - hw_a10_r);
+            mse_hw += (matlab_a10_i - hw_a10_i) * (matlab_a10_i - hw_a10_i);
+            mse_hw += (matlab_a30_r - hw_a30_r) * (matlab_a30_r - hw_a30_r);
+            mse_hw += (matlab_a30_i - hw_a30_i) * (matlab_a30_i - hw_a30_i);
+            mse_hw += (matlab_a50_r - hw_a50_r) * (matlab_a50_r - hw_a50_r);
+            mse_hw += (matlab_a50_i - hw_a50_i) * (matlab_a50_i - hw_a50_i);
+            mse_hw /= num_coeffs;
 
-            if (fabs(expected_a10_r - actual_a10_r) <= MARGIN) {
-                printf("a10_r: correct with error = %lf\n", fabs(expected_a10_r - actual_a10_r));
+            printf("Set %d: MSE (Computed)=%.6f, MSE (HW)=%.6f, Ratio=%.3f", 
+                   (j+1), mse_computed, mse_hw, mse_computed / mse_hw);
+            
+            if (mse_computed < mse_hw) {
+                printf(" ✓ (%.1f%% better)\n", ((mse_hw - mse_computed) / mse_hw) * 100.0);
+            } else if (mse_computed > mse_hw) {
+                printf(" ✗ (%.1f%% worse)\n", ((mse_computed - mse_hw) / mse_hw) * 100.0);
             } else {
-                printf("a10_r: wrong with error = %lf\n", fabs(expected_a10_r - actual_a10_r));
+                printf(" = (equal)\n");
             }
-        
-            if (fabs(expected_a10_i - actual_a10_i) <= MARGIN) {
-                printf("a10_i: correct with error = %lf\n", fabs(expected_a10_i - actual_a10_i));
-            } else {
-                printf("a10_i: wrong with error = %lf\n", fabs(expected_a10_i - actual_a10_i));
-            }
-        
-            if (fabs(expected_a30_r - actual_a30_r) <= MARGIN) {
-                printf("a30_r: correct with error = %lf\n", fabs(expected_a30_r - actual_a30_r));
-            } else {
-                printf("a30_r: wrong with error = %lf\n", fabs(expected_a30_r - actual_a30_r));
-            }
-        
-            if (fabs(expected_a30_i - actual_a30_i) <= MARGIN) {
-                printf("a30_i: correct with error = %lf\n", fabs(expected_a30_i - actual_a30_i));
-            } else {
-                printf("a30_i: wrong with error = %lf\n", fabs(expected_a30_i - actual_a30_i));
-            }
-        
-            if (fabs(expected_a50_r - actual_a50_r) <= MARGIN) {
-                printf("a50_r: correct with error = %lf\n", fabs(expected_a50_r - actual_a50_r));
-            } else {
-                printf("a50_r: wrong with error = %lf\n", fabs(expected_a50_r - actual_a50_r));
-            }
-            if (fabs(expected_a50_i - actual_a50_i) <= MARGIN) {
-                printf("a50_i: correct with error = %lf\n", fabs(expected_a50_i - actual_a50_i));
-            } else {
-                printf("a50_i: wrong with error = %lf\n", fabs(expected_a50_i - actual_a50_i));
-            }    
         }
         // synchronize all cores after updating the coefficients
         synch_barrier();
-
-        // Update local actuator with global_actuator values
-        actuator = global_actuator;
 
     } // end of NUM_SETS loop
     

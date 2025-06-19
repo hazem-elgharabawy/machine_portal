@@ -14,33 +14,20 @@
 #include "arrays/post_dist_out_i.h"
 #include "arrays/post_dist_out_r.h"
 
-//#include "arrays/outer_loop/y_h_y_11_mi.h"
-//#include "arrays/outer_loop/y_h_y_21_mi.h"
-//#include "arrays/outer_loop/y_h_y_31_mi.h"
-//#include "arrays/outer_loop/y_h_y_32_mi.h"
-//#include "arrays/outer_loop/y_h_y_33_mi.h"
-//
-//#include "arrays/outer_loop/y_h_y_inverse_11.h"
-//#include "arrays/outer_loop/y_h_y_inverse_21.h"
-//#include "arrays/outer_loop/y_h_y_inverse_22.h"
-//#include "arrays/outer_loop/y_h_y_inverse_31.h"
-//#include "arrays/outer_loop/y_h_y_inverse_32.h"
-//#include "arrays/outer_loop/y_h_y_inverse_33.h"
-//
-//#include "arrays/outer_loop/inv_11.h"
-//#include "arrays/outer_loop/inv_21.h"
-//#include "arrays/outer_loop/inv_22.h"
-//#include "arrays/outer_loop/inv_31.h"
-//#include "arrays/outer_loop/inv_32.h"
-//#include "arrays/outer_loop/inv_33.h"
-//
+#include "arrays/outer_loop/a10_r_matlab.h"
+#include "arrays/outer_loop/a10_i_matlab.h"
+#include "arrays/outer_loop/a30_r_matlab.h"
+#include "arrays/outer_loop/a30_i_matlab.h"
+#include "arrays/outer_loop/a50_r_matlab.h"
+#include "arrays/outer_loop/a50_i_matlab.h"
 
-#include "arrays/outer_loop/a10_r.h"
-#include "arrays/outer_loop/a10_i.h"
-#include "arrays/outer_loop/a30_r.h"
-#include "arrays/outer_loop/a30_i.h"
-#include "arrays/outer_loop/a50_r.h"
-#include "arrays/outer_loop/a50_i.h"
+#include "arrays/outer_loop/a10_r_hw.h"
+#include "arrays/outer_loop/a10_i_hw.h"
+#include "arrays/outer_loop/a30_r_hw.h"
+#include "arrays/outer_loop/a30_i_hw.h"
+#include "arrays/outer_loop/a50_r_hw.h"
+#include "arrays/outer_loop/a50_i_hw.h"
+
 
 
 //#define YHY_YHE 
@@ -61,11 +48,31 @@
 //#include "arrays/subset1/y_h_y_13.h"   
 //#include "arrays/subset1/y_h_y_23.h"
 //#include "arrays/subset1/y_h_y_33.h"
-#include "arrays/outer_loop/a10_r.h"
-#include "arrays/outer_loop/a10_i.h"
-#include "arrays/outer_loop/a30_r.h"
-#include "arrays/outer_loop/a30_i.h"
-#include "arrays/outer_loop/a50_r.h"
+//#include "arrays/outer_loop/y_h_y_11_mi.h"
+//#include "arrays/outer_loop/y_h_y_21_mi.h"
+//#include "arrays/outer_loop/y_h_y_31_mi.h"
+//#include "arrays/outer_loop/y_h_y_32_mi.h"
+//#include "arrays/outer_loop/y_h_y_33_mi.h"
+//
+//#include "arrays/outer_loop/y_h_y_inverse_11.h"
+//#include "arrays/outer_loop/y_h_y_inverse_21.h"
+//#include "arrays/outer_loop/y_h_y_inverse_22.h"
+//#include "arrays/outer_loop/y_h_y_inverse_31.h"
+//#include "arrays/outer_loop/y_h_y_inverse_32.h"
+//#include "arrays/outer_loop/y_h_y_inverse_33.h"
+//
+//#include "arrays/outer_loop/inv_11.h"
+//#include "arrays/outer_loop/inv_21.h"
+//#include "arrays/outer_loop/inv_22.h"
+//#include "arrays/outer_loop/inv_31.h"
+//#include "arrays/outer_loop/inv_32.h"
+//#include "arrays/outer_loop/inv_33.h"
+//
+//#include "arrays/outer_loop/a10_r.h"
+//#include "arrays/outer_loop/a10_i.h"
+//#include "arrays/outer_loop/a30_r.h"
+//#include "arrays/outer_loop/a30_i.h"
+//#include "arrays/outer_loop/a50_r.h"
 ////#include "arrays/outer_loop/a50_i.h"
 ////#include "arrays/outer_loop/inv_11.h"
 ////#include "arrays/outer_loop/inv_21.h"
@@ -81,10 +88,13 @@
 #define MARGIN 4
 #endif // TEST
 
-#define MARGIN 4
+#define MARGIN 0.05
 #define NUM_SETS 3
 #define NUM_THREADS 8
-#define SET_SIZE 500
+#define SET_SIZE 499
+#define USE_COMPUTED_COEFFS
+//#define USE_HW_COEFFS
+//#define USE_MATLAB_COEFFS
 
 typedef struct {
     fixed_point_t yhe_1_r;               
