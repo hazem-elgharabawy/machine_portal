@@ -234,7 +234,28 @@ int main(){
             yhy_inv.a22 = yhy_inv.a22 << 2; 
             yhy_inv.a23 = yhy_inv.a23 << 2; 
             yhy_inv.a33 = yhy_inv.a33 << 2; 
-            
+            /*
+            printf("YHE MATRIX\n");
+            printf("yhe_1_r  = %lf\n",fixed_to_double(yhe_mat.a11));
+            printf("yhe_1_i  = %lf\n",fixed_to_double(yhe_mat.a12));
+            printf("yhe_2_r  = %lf\n",fixed_to_double(yhe_mat.a13));
+            printf("yhe_2_i  = %lf\n",fixed_to_double(yhe_mat.a22));
+            printf("yhe_3_r  = %lf\n",fixed_to_double(yhe_mat.a23));
+            printf("yhe_3_i  = %lf\n",fixed_to_double(yhe_mat.a33));
+            printf("YHY MATRIX AFTER THE FACTOR\n");
+            printf("yhy_11  = %lf\n",fixed_to_double(yhy_mat.a11));
+            printf("yhy_12  = %lf\n",fixed_to_double(yhy_mat.a12));
+            printf("yhy_13  = %lf\n",fixed_to_double(yhy_mat.a13));
+            printf("yhy_23  = %lf\n",fixed_to_double(yhy_mat.a23));
+            printf("yhy_33  = %lf\n",fixed_to_double(yhy_mat.a33));
+            printf("INV AFTER THE FACTOR\n");
+            printf("inv11  = %lf\n",fixed_to_double(yhy_inv.a11));
+            printf("inv12  = %lf\n",fixed_to_double(yhy_inv.a12));
+            printf("inv13  = %lf\n",fixed_to_double(yhy_inv.a13));
+            printf("inv22  = %lf\n",fixed_to_double(yhy_inv.a22));
+            printf("inv23  = %lf\n",fixed_to_double(yhy_inv.a23));
+            printf("inv33  = %lf\n",fixed_to_double(yhy_inv.a33));
+            */
             //update coefficients of the distorter
             coeff_update(&yhy_inv, &yhe_mat, &global_actuator);
 
@@ -266,7 +287,21 @@ int main(){
             printf("a30_i: MATLAB=%.6f, SW=%.6f, HW=%.6f\n", matlab_a30_i, sw_a30_i, hw_a30_i);
             printf("a50_r: MATLAB=%.6f, SW=%.6f, HW=%.6f\n", matlab_a50_r, sw_a50_r, hw_a50_r);
             printf("a50_i: MATLAB=%.6f, SW=%.6f, HW=%.6f\n", matlab_a50_i, sw_a50_i, hw_a50_i);
+            printf("(MATLAB - SW): a10_r=%.6f, a10_i=%.6f, a30_r=%.6f, a30_i=%.6f, a50_r=%.6f, a50_i=%.6f\n",
+                    fabs(matlab_a10_r - sw_a10_r),
+                    fabs(matlab_a10_i - sw_a10_i),
+                    fabs(matlab_a30_r - sw_a30_r),
+                    fabs(matlab_a30_i - sw_a30_i),
+                    fabs(matlab_a50_r - sw_a50_r),
+                    fabs(matlab_a50_i - sw_a50_i));
 
+                printf("(MATLAB - HW): a10_r=%.6f, a10_i=%.6f, a30_r=%.6f, a30_i=%.6f, a50_r=%.6f, a50_i=%.6f\n",
+                    fabs(matlab_a10_r - hw_a10_r),
+                    fabs(matlab_a10_i - hw_a10_i),
+                    fabs(matlab_a30_r - hw_a30_r),
+                    fabs(matlab_a30_i - hw_a30_i),
+                    fabs(matlab_a50_r - hw_a50_r),
+                    fabs(matlab_a50_i - hw_a50_i));
             // Calculate Mean Square Error (MSE) for all coefficients
             double mse_sw = 0.0;
             double mse_hw = 0.0;
@@ -294,12 +329,13 @@ int main(){
                    (j+1), mse_sw, mse_hw, mse_sw / mse_hw);
             
             if (mse_sw < mse_hw) {
-                printf(" ✓ (%.1f%% better)\n", ((mse_hw - mse_sw) / mse_hw) * 100.0);
+                printf(" SW is (%.1f%% better)\n", ((mse_hw - mse_sw) / mse_hw) * 100.0);
             } else if (mse_sw > mse_hw) {
-                printf(" ✗ (%.1f%% worse)\n", ((mse_sw - mse_hw) / mse_hw) * 100.0);
+                printf(" SW is (%.1f%% worse)\n", ((mse_sw - mse_hw) / mse_hw) * 100.0);
             } else {
                 printf(" = (equal)\n");
             }
+            printf("======================================================\n");
         }
         // synchronize all cores after updating the coefficients
         synch_barrier();
