@@ -267,6 +267,22 @@ int main(){
             printf("a50_r: MATLAB=%.6f, SW=%.6f, HW=%.6f\n", matlab_a50_r, sw_a50_r, hw_a50_r);
             printf("a50_i: MATLAB=%.6f, SW=%.6f, HW=%.6f\n", matlab_a50_i, sw_a50_i, hw_a50_i);
 
+            printf("Errors (MATLAB - SW): a10_r=%.6f, a10_i=%.6f, a30_r=%.6f, a30_i=%.6f, a50_r=%.6f, a50_i=%.6f\n",
+                    fabs(matlab_a10_r - sw_a10_r),
+                    fabs(matlab_a10_i - sw_a10_i),
+                    fabs(matlab_a30_r - sw_a30_r),
+                    fabs(matlab_a30_i - sw_a30_i),
+                    fabs(matlab_a50_r - sw_a50_r),
+                    fabs(matlab_a50_i - sw_a50_i));
+
+                printf("Errors (MATLAB - HW): a10_r=%.6f, a10_i=%.6f, a30_r=%.6f, a30_i=%.6f, a50_r=%.6f, a50_i=%.6f\n",
+                    fabs(matlab_a10_r - hw_a10_r),
+                    fabs(matlab_a10_i - hw_a10_i),
+                    fabs(matlab_a30_r - hw_a30_r),
+                    fabs(matlab_a30_i - hw_a30_i),
+                    fabs(matlab_a50_r - hw_a50_r),
+                    fabs(matlab_a50_i - hw_a50_i));
+
             // Calculate Mean Square Error (MSE) for all coefficients
             double mse_sw = 0.0;
             double mse_hw = 0.0;
