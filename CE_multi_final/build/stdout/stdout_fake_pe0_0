@@ -1,55 +1,25 @@
 Core ID: 0, Number of cores: 8
-YHE MATRIX
-yhe_1_r  = -2.845703
-yhe_1_i  = -13.654297
-yhe_2_r  = -1.041992
-yhe_2_i  = -3.889648
-yhe_3_r  = -0.547852
-yhe_3_i  = -1.560547
-YHY MATRIX AFTER THE FACTOR
-yhy_11  = 15.152344
-yhy_12  = 3.586914
-yhy_13  = 1.197266
-yhy_23  = 0.504883
-yhy_33  = 0.250977
-a11_a13 = 18.140625
-a11_a23 = 7.649414
-a11_a33 = 3.802734
-a12_a12 = 12.865234
-a12_a13 = 4.293945
-a12_a23 = 1.810547
-a12_a33 = 0.899414
-a13_a13 = 1.432617
-a13_a23 = 0.603516
-a13_a33 = 0.299805
-a23_a23 = 0.254883
-det = 0.664063
-adj.a11 = 0.044922
-adj.a12 = -0.295898
-adj.a22 = 2.370117
-adj.a13 = 0.377930
-adj.a23 = -3.355469
-adj.a33 = 5.275391
-INV AFTER THE FACTOR
-inv11  = 0.134766
-inv12  = -0.890625
-inv13  = 1.136719
-inv22  = 7.136719
-inv23  = -10.105469
-inv33  = 15.886719
-Set 1: Coefficients updated:
-
-Debug values:
-a10_r: expected=0.986328, actual=0.977539, diff=0.008789
-a10_i: expected=0.072266, actual=0.009766, diff=0.062500
-a30_r: expected=0.543945, actual=0.428711, diff=0.115234
-a30_i: expected=0.194336, actual=-0.019531, diff=0.213867
-a50_r: expected=-1.179688, actual=-1.083984, diff=-0.095703
-a50_i: expected=-0.632813, actual=-0.662109, diff=0.029297
-MARGIN=0.050000
-a10_r: correct with error = 0.008789
-a10_i: wrong with error = 0.062500
-a30_r: wrong with error = 0.115234
-a30_i: wrong with error = 0.213867
-a50_r: wrong with error = 0.095703
-a50_i: correct with error = 0.029297
+Set 1 Coefficients:
+a10_r: MATLAB=1.008800, SW=1.011719, HW=1.038086
+a10_i: MATLAB=-0.007700, SW=0.002930, HW=0.124023
+a30_r: MATLAB=-0.095100, SW=-0.096680, HW=-0.045898
+a30_i: MATLAB=-0.267000, SW=-0.339844, HW=-0.146484
+a50_r: MATLAB=0.061900, SW=-0.046875, HW=-0.026367
+a50_i: MATLAB=0.185100, SW=0.065430, HW=0.093750
+Set 1: MSE (SW)=0.005264, MSE (HW)=0.008548, Ratio=0.616 ✓ (38.4% better)
+Set 2 Coefficients:
+a10_r: MATLAB=1.022500, SW=0.991211, HW=0.986328
+a10_i: MATLAB=-0.012800, SW=-0.061523, HW=0.072266
+a30_r: MATLAB=-0.200100, SW=0.150391, HW=0.543945
+a30_i: MATLAB=-0.570400, SW=0.097656, HW=0.194336
+a50_r: MATLAB=0.135700, SW=-0.596680, HW=-1.179688
+a50_i: MATLAB=0.434600, SW=-0.841797, HW=-0.632813
+Set 2: MSE (SW)=0.456344, MSE (HW)=0.669430, Ratio=0.682 ✓ (31.8% better)
+Set 3 Coefficients:
+a10_r: MATLAB=1.023000, SW=1.009766, HW=1.007813
+a10_i: MATLAB=-0.015400, SW=-0.028320, HW=0.095703
+a30_r: MATLAB=-0.203700, SW=-0.091797, HW=0.134766
+a30_i: MATLAB=-0.579400, SW=-0.379883, HW=-0.256836
+a50_r: MATLAB=0.135000, SW=-0.141602, HW=-0.488281
+a50_i: MATLAB=0.418800, SW=-0.026367, HW=0.017578
+Set 3: MSE (SW)=0.054559, MSE (HW)=0.130107, Ratio=0.419 ✓ (58.1% better)

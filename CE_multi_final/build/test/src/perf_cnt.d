@@ -1,4 +1,4 @@
-/home/ICer/Desktop/ISOLATION/regression_tests/Coefficients_Estimator_multi_16bit/build/test/src/perf_cnt.o: \
+/home/ICer/Desktop/ISOLATION/regression_tests/CE_multi_final/build/test/src/perf_cnt.o: \
  src/perf_cnt.c \
  /home/ICer/Desktop/ISOLATION/pulp-runtime/include/chips/pulp/config.h \
  /home/ICer/Desktop/ISOLATION/pulp-runtime/include/archi/pulp_defs.h \

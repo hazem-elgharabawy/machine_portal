@@ -1,5 +1,5 @@
 #include "../../fixed.h"
-fixed_point_t a50_i_matlab_arr [] = {
+double a50_i_matlab_arr [] = {
 0,
 0.1851,
 0.4346,

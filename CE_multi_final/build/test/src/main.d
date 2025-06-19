@@ -1,4 +1,4 @@
-/home/ICer/Desktop/ISOLATION/regression_tests/Coefficients_Estimator_multi_16bit/build/test/src/main.o: \
+/home/ICer/Desktop/ISOLATION/regression_tests/CE_multi_final/build/test/src/main.o: \
  src/main.c \
  /home/ICer/Desktop/ISOLATION/pulp-runtime/include/chips/pulp/config.h \
  /home/ICer/Desktop/ISOLATION/pulp-runtime/include/archi/pulp_defs.h \
@@ -72,13 +72,20 @@
  src/../inc/arrays/sync_pa_out_i.h src/../inc/arrays/../fixed.h \
  src/../inc/arrays/sync_pa_out_r.h src/../inc/arrays/sync_pa_in_i.h \
  src/../inc/arrays/sync_pa_in_r.h src/../inc/arrays/post_dist_out_i.h \
- src/../inc/arrays/post_dist_out_r.h src/../inc/arrays/outer_loop/a10_r.h \
+ src/../inc/arrays/post_dist_out_r.h \
+ src/../inc/arrays/outer_loop/a10_r_matlab.h \
  src/../inc/arrays/outer_loop/../../fixed.h \
- src/../inc/arrays/outer_loop/a10_i.h \
- src/../inc/arrays/outer_loop/a30_r.h \
- src/../inc/arrays/outer_loop/a30_i.h \
- src/../inc/arrays/outer_loop/a50_r.h \
- src/../inc/arrays/outer_loop/a50_i.h
+ src/../inc/arrays/outer_loop/a10_i_matlab.h \
+ src/../inc/arrays/outer_loop/a30_r_matlab.h \
+ src/../inc/arrays/outer_loop/a30_i_matlab.h \
+ src/../inc/arrays/outer_loop/a50_r_matlab.h \
+ src/../inc/arrays/outer_loop/a50_i_matlab.h \
+ src/../inc/arrays/outer_loop/a10_r_hw.h \
+ src/../inc/arrays/outer_loop/a10_i_hw.h \
+ src/../inc/arrays/outer_loop/a30_r_hw.h \
+ src/../inc/arrays/outer_loop/a30_i_hw.h \
+ src/../inc/arrays/outer_loop/a50_r_hw.h \
+ src/../inc/arrays/outer_loop/a50_i_hw.h
 
 /home/ICer/Desktop/ISOLATION/pulp-runtime/include/chips/pulp/config.h:
 
@@ -234,16 +241,28 @@ src/../inc/arrays/post_dist_out_i.h:
 
 src/../inc/arrays/post_dist_out_r.h:
 
-src/../inc/arrays/outer_loop/a10_r.h:
+src/../inc/arrays/outer_loop/a10_r_matlab.h:
 
 src/../inc/arrays/outer_loop/../../fixed.h:
 
-src/../inc/arrays/outer_loop/a10_i.h:
+src/../inc/arrays/outer_loop/a10_i_matlab.h:
 
-src/../inc/arrays/outer_loop/a30_r.h:
+src/../inc/arrays/outer_loop/a30_r_matlab.h:
 
-src/../inc/arrays/outer_loop/a30_i.h:
+src/../inc/arrays/outer_loop/a30_i_matlab.h:
 
-src/../inc/arrays/outer_loop/a50_r.h:
+src/../inc/arrays/outer_loop/a50_r_matlab.h:
 
-src/../inc/arrays/outer_loop/a50_i.h:
+src/../inc/arrays/outer_loop/a50_i_matlab.h:
+
+src/../inc/arrays/outer_loop/a10_r_hw.h:
+
+src/../inc/arrays/outer_loop/a10_i_hw.h:
+
+src/../inc/arrays/outer_loop/a30_r_hw.h:
+
+src/../inc/arrays/outer_loop/a30_i_hw.h:
+
+src/../inc/arrays/outer_loop/a50_r_hw.h:
+
+src/../inc/arrays/outer_loop/a50_i_hw.h:

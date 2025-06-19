@@ -1,4 +1,4 @@
-/home/ICer/Desktop/ISOLATION/regression_tests/Coefficients_Estimator_multi_16bit/build/test/kernel/alloc_pool.o: \
+/home/ICer/Desktop/ISOLATION/regression_tests/CE_multi_final/build/test/kernel/alloc_pool.o: \
  /home/ICer/Desktop/ISOLATION/pulp-runtime/kernel/alloc_pool.c \
  /home/ICer/Desktop/ISOLATION/pulp-runtime/include/chips/pulp/config.h \
  /home/ICer/Desktop/ISOLATION/pulp-runtime/include/archi/pulp_defs.h \

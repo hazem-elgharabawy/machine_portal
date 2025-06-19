@@ -1,4 +1,4 @@
-/home/ICer/Desktop/ISOLATION/regression_tests/Coefficients_Estimator_multi_16bit/build/test/lib/libc/minimal/io.o: \
+/home/ICer/Desktop/ISOLATION/regression_tests/CE_multi_final/build/test/lib/libc/minimal/io.o: \
  /home/ICer/Desktop/ISOLATION/pulp-runtime/lib/libc/minimal/io.c \
  /home/ICer/Desktop/ISOLATION/pulp-runtime/include/chips/pulp/config.h \
  /home/ICer/Desktop/ISOLATION/pulp-runtime/include/archi/pulp_defs.h \

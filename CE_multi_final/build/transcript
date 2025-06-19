@@ -1,7 +1,7 @@
 # source /home/ICer/Desktop/ISOLATION/pulp/sim/tcl_files/config/run_and_exit.tcl
 # source /home/ICer/Desktop/ISOLATION/pulp/sim/tcl_files/run.tcl
 # vsim -c -quiet vopt_tb -L models_lib -L vip_lib -t ps "+nowarnTRAN" "+nowarnTSCALE" "+nowarnTFMPC" "+TB_PATH=/home/ICer/Desktop/ISOLATION/pulp/sim/../../fe/tb/" "+UVM_NO_RELNOTES" "+ENTRY_POINT=0x1c008080" -permit_unmatched_virtual_intf "+VSIM_PATH=/home/ICer/Desktop/ISOLATION/pulp/sim" -gUSE_SDVT_SPI=0 -gUSE_SDVT_CPI=0 -gBAUDRATE=115200 -gENABLE_DEV_DPI=0 -gLOAD_L2=JTAG -gUSE_SDVT_I2S=0 
-# Start time: 01:07:03 on Jun 19,2025
+# Start time: 09:08:16 on Jun 19,2025
 # //  Questa Sim-64
 # //  Version 10.7c linux_x86_64 Aug 17 2018
 # //
@@ -90,7 +90,11 @@
 # [pulp_tap_if] WRITE32 burst @1c002000 for        1024 bytes.
 # [pulp_tap_if] WRITE32 burst @1c002400 for        1024 bytes.
 # [pulp_tap_if] WRITE32 burst @1c002800 for        1024 bytes.
-# [pulp_tap_if] WRITE32 burst @1c002c00 for         840 bytes.
+# [pulp_tap_if] WRITE32 burst @1c002c00 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c003000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c003400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c003800 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c003c00 for         296 bytes.
 # [pulp_tap_if] WRITE32 burst @1c008000 for        1024 bytes.
 # [pulp_tap_if] WRITE32 burst @1c008400 for        1024 bytes.
 # [pulp_tap_if] WRITE32 burst @1c008800 for        1024 bytes.
@@ -106,100 +110,73 @@
 # [pulp_tap_if] WRITE32 burst @1c00b000 for        1024 bytes.
 # [pulp_tap_if] WRITE32 burst @1c00b400 for        1024 bytes.
 # [pulp_tap_if] WRITE32 burst @1c00b800 for        1024 bytes.
-# [pulp_tap_if] WRITE32 burst @1c00bc00 for         264 bytes.
-# [TB] 22788701ns - Resuming the CORE
-# [TB] 22847501ns retrying debug reg access
-# [TB] 22876801ns retrying debug reg access
-# [TB] 22906101ns retrying debug reg access
-# [TB] 22935401ns retrying debug reg access
-# [TB] 22964701ns retrying debug reg access
-# [TB] 22994001ns retrying debug reg access
-# [TB] 23023301ns retrying debug reg access
-# [TB] 23052601ns retrying debug reg access
-# [TB] 23081901ns retrying debug reg access
-# [TB] 23111201ns retrying debug reg access
-# [TB] 23140501ns retrying debug reg access
-# [TB] 23169801ns retrying debug reg access
-# [TB] 23199101ns retrying debug reg access
-# [TB] 23228401ns retrying debug reg access
-# [TB] 23257701ns retrying debug reg access
-# [TB] 23287001ns retrying debug reg access
-# [TB] 23316301ns retrying debug reg access
-# [TB] 23345601ns retrying debug reg access
-# [TB] 23374901ns retrying debug reg access
-# [TB] 23404201ns retrying debug reg access
-# [TB] 23433501ns retrying debug reg access
-# [TB] 23462801ns retrying debug reg access
-# [TB] 23492101ns retrying debug reg access
-# [TB] 23521401ns retrying debug reg access
-# [TB] 23550701ns retrying debug reg access
-# [TB] 24109401ns - Waiting for end of computation
+# [pulp_tap_if] WRITE32 burst @1c00bc00 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c00c000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c00c400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c00c800 for         280 bytes.
+# [TB] 28177001ns - Resuming the CORE
+# [TB] 28235801ns retrying debug reg access
+# [TB] 28265101ns retrying debug reg access
+# [TB] 28294401ns retrying debug reg access
+# [TB] 28323701ns retrying debug reg access
+# [TB] 28353001ns retrying debug reg access
+# [TB] 28382301ns retrying debug reg access
+# [TB] 28411601ns retrying debug reg access
+# [TB] 28440901ns retrying debug reg access
+# [TB] 28470201ns retrying debug reg access
+# [TB] 28499501ns retrying debug reg access
+# [TB] 28528801ns retrying debug reg access
+# [TB] 28558101ns retrying debug reg access
+# [TB] 28587401ns retrying debug reg access
+# [TB] 28616701ns retrying debug reg access
+# [TB] 28646001ns retrying debug reg access
+# [TB] 28675301ns retrying debug reg access
+# [TB] 28704601ns retrying debug reg access
+# [TB] 28733901ns retrying debug reg access
+# [TB] 28763201ns retrying debug reg access
+# [TB] 28792501ns retrying debug reg access
+# [TB] 28821801ns retrying debug reg access
+# [TB] 28851101ns retrying debug reg access
+# [TB] 28880401ns retrying debug reg access
+# [TB] 28909701ns retrying debug reg access
+# [TB] 28939001ns retrying debug reg access
+# [TB] 29497701ns - Waiting for end of computation
 # [STDOUT-CL0_PE0] Core ID: 0, Number of cores: 8
-# [STDOUT-CL0_PE2] Core ID: 2, Number of cores: 8
 # [STDOUT-CL0_PE1] Core ID: 1, Number of cores: 8
-# [STDOUT-CL0_PE7] Core ID: 7, Number of cores: 8
-# [STDOUT-CL0_PE4] Core ID: 4, Number of cores: 8
-# [STDOUT-CL0_PE5] Core ID: 5, Number of cores: 8
-# [STDOUT-CL0_PE6] Core ID: 6, Number of cores: 8
+# [STDOUT-CL0_PE2] Core ID: 2, Number of cores: 8
 # [STDOUT-CL0_PE3] Core ID: 3, Number of cores: 8
-# [STDOUT-CL0_PE0] YHE MATRIX
-# [STDOUT-CL0_PE0] yhe_1_r  = -2.845703
-# [STDOUT-CL0_PE0] yhe_1_i  = -13.654297
-# [STDOUT-CL0_PE0] yhe_2_r  = -1.041992
-# [STDOUT-CL0_PE0] yhe_2_i  = -3.889648
-# [STDOUT-CL0_PE0] yhe_3_r  = -0.547852
-# [STDOUT-CL0_PE0] yhe_3_i  = -1.560547
-# [STDOUT-CL0_PE0] YHY MATRIX AFTER THE FACTOR
-# [STDOUT-CL0_PE0] yhy_11  = 15.152344
-# [STDOUT-CL0_PE0] yhy_12  = 3.586914
-# [STDOUT-CL0_PE0] yhy_13  = 1.197266
-# [STDOUT-CL0_PE0] yhy_23  = 0.504883
-# [STDOUT-CL0_PE0] yhy_33  = 0.250977
-# [STDOUT-CL0_PE0] a11_a13 = 18.140625
-# [STDOUT-CL0_PE0] a11_a23 = 7.649414
-# [STDOUT-CL0_PE0] a11_a33 = 3.802734
-# [STDOUT-CL0_PE0] a12_a12 = 12.865234
-# [STDOUT-CL0_PE0] a12_a13 = 4.293945
-# [STDOUT-CL0_PE0] a12_a23 = 1.810547
-# [STDOUT-CL0_PE0] a12_a33 = 0.899414
-# [STDOUT-CL0_PE0] a13_a13 = 1.432617
-# [STDOUT-CL0_PE0] a13_a23 = 0.603516
-# [STDOUT-CL0_PE0] a13_a33 = 0.299805
-# [STDOUT-CL0_PE0] a23_a23 = 0.254883
-# [STDOUT-CL0_PE0] det = 0.664063
-# [STDOUT-CL0_PE0] adj.a11 = 0.044922
-# [STDOUT-CL0_PE0] adj.a12 = -0.295898
-# [STDOUT-CL0_PE0] adj.a22 = 2.370117
-# [STDOUT-CL0_PE0] adj.a13 = 0.377930
-# [STDOUT-CL0_PE0] adj.a23 = -3.355469
-# [STDOUT-CL0_PE0] adj.a33 = 5.275391
-# [STDOUT-CL0_PE0] INV AFTER THE FACTOR
-# [STDOUT-CL0_PE0] inv11  = 0.134766
-# [STDOUT-CL0_PE0] inv12  = -0.890625
-# [STDOUT-CL0_PE0] inv13  = 1.136719
-# [STDOUT-CL0_PE0] inv22  = 7.136719
-# [STDOUT-CL0_PE0] inv23  = -10.105469
-# [STDOUT-CL0_PE0] inv33  = 15.886719
-# [STDOUT-CL0_PE0] Set 1: Coefficients updated:
-# [STDOUT-CL0_PE0] 
-# [STDOUT-CL0_PE0] Debug values:
-# [STDOUT-CL0_PE0] a10_r: expected=0.986328, actual=0.977539, diff=0.008789
-# [STDOUT-CL0_PE0] a10_i: expected=0.072266, actual=0.009766, diff=0.062500
-# [STDOUT-CL0_PE0] a30_r: expected=0.543945, actual=0.428711, diff=0.115234
-# [STDOUT-CL0_PE0] a30_i: expected=0.194336, actual=-0.019531, diff=0.213867
-# [STDOUT-CL0_PE0] a50_r: expected=-1.179688, actual=-1.083984, diff=-0.095703
-# [STDOUT-CL0_PE0] a50_i: expected=-0.632813, actual=-0.662109, diff=0.029297
-# [STDOUT-CL0_PE0] MARGIN=0.050000
-# [STDOUT-CL0_PE0] a10_r: correct with error = 0.008789
-# [STDOUT-CL0_PE0] a10_i: wrong with error = 0.062500
-# [STDOUT-CL0_PE0] a30_r: wrong with error = 0.115234
-# [STDOUT-CL0_PE0] a30_i: wrong with error = 0.213867
-# [STDOUT-CL0_PE0] a50_r: wrong with error = 0.095703
-# [STDOUT-CL0_PE0] a50_i: correct with error = 0.029297
-# [TB] 31907801ns - Received status core: 0x00000000
+# [STDOUT-CL0_PE6] Core ID: 6, Number of cores: 8
+# [STDOUT-CL0_PE5] Core ID: 5, Number of cores: 8
+# [STDOUT-CL0_PE4] Core ID: 4, Number of cores: 8
+# [STDOUT-CL0_PE7] Core ID: 7, Number of cores: 8
+# [STDOUT-CL0_PE0] Set 1 Coefficients:
+# [STDOUT-CL0_PE0] a10_r: MATLAB=1.008800, SW=1.011719, HW=1.038086
+# [STDOUT-CL0_PE0] a10_i: MATLAB=-0.007700, SW=0.002930, HW=0.124023
+# [STDOUT-CL0_PE0] a30_r: MATLAB=-0.095100, SW=-0.096680, HW=-0.045898
+# [STDOUT-CL0_PE0] a30_i: MATLAB=-0.267000, SW=-0.339844, HW=-0.146484
+# [STDOUT-CL0_PE0] a50_r: MATLAB=0.061900, SW=-0.046875, HW=-0.026367
+# [STDOUT-CL0_PE0] a50_i: MATLAB=0.185100, SW=0.065430, HW=0.093750
+# [STDOUT-CL0_PE0] Set 1: MSE (SW)=0.005264, MSE (HW)=0.008548, Ratio=0.616 ✓ (38.4% better)
+# [STDOUT-CL0_PE0] Set 2 Coefficients:
+# [STDOUT-CL0_PE0] a10_r: MATLAB=1.022500, SW=0.991211, HW=0.986328
+# [STDOUT-CL0_PE0] a10_i: MATLAB=-0.012800, SW=-0.061523, HW=0.072266
+# [STDOUT-CL0_PE0] a30_r: MATLAB=-0.200100, SW=0.150391, HW=0.543945
+# [STDOUT-CL0_PE0] a30_i: MATLAB=-0.570400, SW=0.097656, HW=0.194336
+# [STDOUT-CL0_PE0] a50_r: MATLAB=0.135700, SW=-0.596680, HW=-1.179688
+# [STDOUT-CL0_PE0] a50_i: MATLAB=0.434600, SW=-0.841797, HW=-0.632813
+# [STDOUT-CL0_PE0] Set 2: MSE (SW)=0.456344, MSE (HW)=0.669430, Ratio=0.682 ✓ (31.8% better)
+# [STDOUT-CL0_PE0] Set 3 Coefficients:
+# [STDOUT-CL0_PE0] a10_r: MATLAB=1.023000, SW=1.009766, HW=1.007813
+# [STDOUT-CL0_PE0] a10_i: MATLAB=-0.015400, SW=-0.028320, HW=0.095703
+# [STDOUT-CL0_PE0] a30_r: MATLAB=-0.203700, SW=-0.091797, HW=0.134766
+# [STDOUT-CL0_PE0] a30_i: MATLAB=-0.579400, SW=-0.379883, HW=-0.256836
+# [STDOUT-CL0_PE0] a50_r: MATLAB=0.135000, SW=-0.141602, HW=-0.488281
+# [STDOUT-CL0_PE0] a50_i: MATLAB=0.418800, SW=-0.026367, HW=0.017578
+# [STDOUT-CL0_PE0] Set 3: MSE (SW)=0.054559, MSE (HW)=0.130107, Ratio=0.419 ✓ (58.1% better)
+# [TB] 40060301ns - Received status core: 0x00000000
 # ** Note: $stop    : /home/ICer/Desktop/ISOLATION/pulp/rtl/tb/tb_pulp.sv(1008)
-#    Time: 31907801 ns  Iteration: 0  Instance: /tb_pulp
+#    Time: 40060301 ns  Iteration: 0  Instance: /tb_pulp
 # Break at /home/ICer/Desktop/ISOLATION/pulp/rtl/tb/tb_pulp.sv line 1008
 # Stopped at /home/ICer/Desktop/ISOLATION/pulp/rtl/tb/tb_pulp.sv line 1008
-# End time: 01:12:31 on Jun 19,2025, Elapsed time: 0:05:28
+# End time: 09:15:05 on Jun 19,2025, Elapsed time: 0:06:49
 # Errors: 4, Warnings: 12

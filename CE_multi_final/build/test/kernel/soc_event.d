@@ -1,4 +1,4 @@
-/home/ICer/Desktop/ISOLATION/regression_tests/Coefficients_Estimator_multi_16bit/build/test/kernel/soc_event.o: \
+/home/ICer/Desktop/ISOLATION/regression_tests/CE_multi_final/build/test/kernel/soc_event.o: \
  /home/ICer/Desktop/ISOLATION/pulp-runtime/kernel/soc_event.c \
  /home/ICer/Desktop/ISOLATION/pulp-runtime/include/chips/pulp/config.h \
  /home/ICer/Desktop/ISOLATION/pulp-runtime/include/archi/pulp_defs.h \

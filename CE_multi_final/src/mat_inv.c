@@ -87,7 +87,7 @@ int8_t mat_inv(const Matrix_S* mat, Matrix_S* inv) {
     fixed_point_t det = det1 - det2 - det3;
     
     det = det << 4;                                             // multiply the det by factor of 32 to avoid overflow  
-    printf("det = %lf\n", fixed_to_double(det));
+    //printf("det = %lf\n", fixed_to_double(det));
     // Check if determinant is zero
     if (det == 0) {
         return -1; // Matrix is singular, cannot invert
