@@ -3,7 +3,7 @@
 Actuator_S global_actuator = {
     .in_r = 0,
     .in_i = 0,
-    .a10_r = 1<<FRACT_WIDTH,    // (no distortion) for the first block of data
+    .a10_r = (1<<FRACT_WIDTH),    // (no distortion) for the first block of data
     .a10_i = 0,
     .a30_r = 0,
     .a30_i = 0,
@@ -53,12 +53,12 @@ int main(){
 #else
     #ifdef USE_MATLAB_COEFFS
         // Load coefficients from MATLAB arrays
-        actuator.a10_r = a10_r_matlab_arr[j];
-        actuator.a10_i = a10_i_matlab_arr[j];
-        actuator.a30_r = a30_r_matlab_arr[j];
-        actuator.a30_i = a30_i_matlab_arr[j];
-        actuator.a50_r = a50_r_matlab_arr[j];
-        actuator.a50_i = a50_i_matlab_arr[j];
+        actuator.a10_r = double_to_fixed(a10_r_matlab_arr[j]);
+        actuator.a10_i = double_to_fixed(a10_i_matlab_arr[j]);
+        actuator.a30_r = double_to_fixed(a30_r_matlab_arr[j]);
+        actuator.a30_i = double_to_fixed(a30_i_matlab_arr[j]);
+        actuator.a50_r = double_to_fixed(a50_r_matlab_arr[j]);
+        actuator.a50_i = double_to_fixed(a50_i_matlab_arr[j]);
     #else
         #ifdef USE_HW_COEFFS
             // Load coefficients from hardware arrays
@@ -215,7 +215,21 @@ int main(){
             yhy_mat.a13 = yhy_mat.a13 >> 2; // divide by 4
             yhy_mat.a23 = yhy_mat.a23 >> 2; // divide by 4
             yhy_mat.a33 = yhy_mat.a33 >> 2; // divide by 4
-
+/*
+            printf("YHE MATRIX\n");
+            printf("yhe_1_r  = %lf\n",fixed_to_double(yhe_mat.a11));
+            printf("yhe_1_i  = %lf\n",fixed_to_double(yhe_mat.a12));
+            printf("yhe_2_r  = %lf\n",fixed_to_double(yhe_mat.a13));
+            printf("yhe_2_i  = %lf\n",fixed_to_double(yhe_mat.a22));
+            printf("yhe_3_r  = %lf\n",fixed_to_double(yhe_mat.a23));
+            printf("yhe_3_i  = %lf\n",fixed_to_double(yhe_mat.a33));
+            printf("YHY MATRIX AFTER THE FACTOR\n");
+            printf("yhy_11  = %lf\n",fixed_to_double(yhy_mat.a11));
+            printf("yhy_12  = %lf\n",fixed_to_double(yhy_mat.a12));
+            printf("yhy_13  = %lf\n",fixed_to_double(yhy_mat.a13));
+            printf("yhy_23  = %lf\n",fixed_to_double(yhy_mat.a23));
+            printf("yhy_33  = %lf\n",fixed_to_double(yhy_mat.a33));
+*/
             // Now we have the YHY and YHE matrices, we need to invert the YHY matrix
             
             // Create a matrix for the inverse of YHY            
@@ -234,20 +248,8 @@ int main(){
             yhy_inv.a22 = yhy_inv.a22 << 2; 
             yhy_inv.a23 = yhy_inv.a23 << 2; 
             yhy_inv.a33 = yhy_inv.a33 << 2; 
+            
             /*
-            printf("YHE MATRIX\n");
-            printf("yhe_1_r  = %lf\n",fixed_to_double(yhe_mat.a11));
-            printf("yhe_1_i  = %lf\n",fixed_to_double(yhe_mat.a12));
-            printf("yhe_2_r  = %lf\n",fixed_to_double(yhe_mat.a13));
-            printf("yhe_2_i  = %lf\n",fixed_to_double(yhe_mat.a22));
-            printf("yhe_3_r  = %lf\n",fixed_to_double(yhe_mat.a23));
-            printf("yhe_3_i  = %lf\n",fixed_to_double(yhe_mat.a33));
-            printf("YHY MATRIX AFTER THE FACTOR\n");
-            printf("yhy_11  = %lf\n",fixed_to_double(yhy_mat.a11));
-            printf("yhy_12  = %lf\n",fixed_to_double(yhy_mat.a12));
-            printf("yhy_13  = %lf\n",fixed_to_double(yhy_mat.a13));
-            printf("yhy_23  = %lf\n",fixed_to_double(yhy_mat.a23));
-            printf("yhy_33  = %lf\n",fixed_to_double(yhy_mat.a33));
             printf("INV AFTER THE FACTOR\n");
             printf("inv11  = %lf\n",fixed_to_double(yhy_inv.a11));
             printf("inv12  = %lf\n",fixed_to_double(yhy_inv.a12));
@@ -325,13 +327,13 @@ int main(){
             mse_hw += (matlab_a50_i - hw_a50_i) * (matlab_a50_i - hw_a50_i);
             mse_hw /= num_coeffs;
 
-            printf("Set %d: MSE (SW)=%.6f, MSE (HW)=%.6f, Ratio=%.3f", 
+            printf("Set %d: MSE (SW)=%.6f, MSE (HW)=%.6f, Ratio=%.3f\n", 
                    (j+1), mse_sw, mse_hw, mse_sw / mse_hw);
             
             if (mse_sw < mse_hw) {
-                printf(" SW is (%.1f%% better)\n", ((mse_hw - mse_sw) / mse_hw) * 100.0);
+                printf("SW is %.1f%% better\n", ((mse_hw - mse_sw) / mse_hw) * 100.0);
             } else if (mse_sw > mse_hw) {
-                printf(" SW is (%.1f%% worse)\n", ((mse_sw - mse_hw) / mse_hw) * 100.0);
+                printf("SW is %.1f%% worse\n", ((mse_sw - mse_hw) / mse_hw) * 100.0);
             } else {
                 printf(" = (equal)\n");
             }
