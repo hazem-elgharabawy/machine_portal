@@ -15,5 +15,5 @@ typedef struct {
 
 //function declaration
 int8_t mat_inv(const Matrix_S* mat, Matrix_S* inv);
-
+int8_t mat_inv_parallel(const Matrix_S* mat, Matrix_S* inv);
 #endif // MAT_INV_H

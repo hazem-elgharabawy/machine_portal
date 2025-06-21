@@ -9,5 +9,6 @@
 
 //function declaration
 void coeff_update(const Matrix_S* yhy_inv, const Matrix_S* yhe_mat, Actuator_S* actuator);
+void coeff_update_parallel(const Matrix_S* yhy_inv, const Matrix_S* yhe_mat, Actuator_S* actuator);
 
 #endif // COEFF_UPDATE_H

@@ -3,26 +3,20 @@
 int main(){
 
     int time = 0;
-
-
-
-
     Actuator_S actuator = {0};
     actuator.a10_r = double_to_fixed(1);     // (no distortion) for the first block of data  
-
-    
 
     for (int j = 0; j < NUM_SETS; j++)
     {
         #ifdef PROFILE
-        // start performance counters
-        perf_reset();
-        perf_start();
-    #endif
+            // start performance counters
+            perf_reset();
+            perf_start();
+            reset_timer();
+            start_timer();
+        #endif
     
     
-      reset_timer();
-      start_timer();
         fixed_point_t yhy_11_acumalator_arr[SET_SIZE/100] = {0};
         fixed_point_t yhy_11  = 0;
         fixed_point_t yhy_12  = 0;
@@ -137,7 +131,6 @@ int main(){
         ************************************************************************************************************
         */
 
-      
         // YHE matrix
         // Note: We are using a 3x3 matrix to store the YHE values
         Matrix_S yhe_mat = {0};
@@ -168,26 +161,18 @@ int main(){
             return yhy_inv_status;
         }
 
-        // Now we have the YHY inverse matrix, we need to scale it by 16
-        yhy_inv.a11 = yhy_inv.a11 << 2; 
-        yhy_inv.a12 = yhy_inv.a12 << 2; 
-        yhy_inv.a13 = yhy_inv.a13 << 2; 
-        yhy_inv.a22 = yhy_inv.a22 << 2; 
-        yhy_inv.a23 = yhy_inv.a23 << 2; 
-        yhy_inv.a33 = yhy_inv.a33 << 2; 
-
         //update coefficients of the distorter
         coeff_update(&yhy_inv, &yhe_mat, &actuator);
-        stop_timer();
-        time = get_time();
+        
         #ifdef PROFILE
+            stop_timer();
+            time = get_time();
             // stop performance counters
             perf_stop();
+            printf("set %d) took %d cycles on single core \n",j+1, time);
         #endif
-        printf("set %d) took %d cycles on single core \n",j+1, time);
 
-
-        //printf("Set %d: Coefficients updated:\n", j);
+        printf("Set %d: Coefficients updated:\n", j);
     } // end of NUM_SETS loop
 
 

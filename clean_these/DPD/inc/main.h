@@ -28,10 +28,6 @@
 #define MARGIN 4  
 #endif
 
-
-
-
-
 typedef struct {
     int count;
     double sum_r, sum_i, sum_r_squared, sum_i_squared;

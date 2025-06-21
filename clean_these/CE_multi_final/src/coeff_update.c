@@ -93,3 +93,41 @@ void coeff_update(const Matrix_S* yhy_inv,const Matrix_S* yhe_mat, Actuator_S* a
     printf("****************************\n");
 */
 }
+
+void coeff_update_parallel(const Matrix_S* yhy_inv, const Matrix_S* yhe_mat, Actuator_S* actuator) {
+    int core_id = rt_core_id();
+    int num_cores = get_core_num();
+
+    // Shared memory for temporary results
+    static __attribute__((aligned(16))) fixed_point_t temp_coeffs[6];
+
+    // Parallel computation of the 6 temporary coefficients
+    for (int i = core_id; i < 6; i += num_cores) {
+        if (i == 0) { // a10_r_temp
+            temp_coeffs[i] = fixed_mul(yhy_inv->a11, yhe_mat->a11) + fixed_mul(yhy_inv->a12, yhe_mat->a13) + fixed_mul(yhy_inv->a13, yhe_mat->a23);
+        } else if (i == 1) { // a10_i_temp
+            temp_coeffs[i] = fixed_mul(yhy_inv->a11, yhe_mat->a12) + fixed_mul(yhy_inv->a12, yhe_mat->a22) + fixed_mul(yhy_inv->a13, yhe_mat->a33);
+        } else if (i == 2) { // a30_r_temp
+            temp_coeffs[i] = fixed_mul(yhy_inv->a12, yhe_mat->a11) + fixed_mul(yhy_inv->a22, yhe_mat->a13) + fixed_mul(yhy_inv->a23, yhe_mat->a23);
+        } else if (i == 3) { // a30_i_temp
+            temp_coeffs[i] = fixed_mul(yhy_inv->a12, yhe_mat->a12) + fixed_mul(yhy_inv->a22, yhe_mat->a22) + fixed_mul(yhy_inv->a23, yhe_mat->a33);
+        } else if (i == 4) { // a50_r_temp
+            temp_coeffs[i] = fixed_mul(yhy_inv->a13, yhe_mat->a11) + fixed_mul(yhy_inv->a23, yhe_mat->a13) + fixed_mul(yhy_inv->a33, yhe_mat->a23);
+        } else if (i == 5) { // a50_i_temp
+            temp_coeffs[i] = fixed_mul(yhy_inv->a13, yhe_mat->a12) + fixed_mul(yhy_inv->a23, yhe_mat->a22) + fixed_mul(yhy_inv->a33, yhe_mat->a33);
+        }
+    }
+
+    synch_barrier();
+
+    if (core_id == 0) {
+        actuator->a10_r += (temp_coeffs[0] >> 2) + (temp_coeffs[0] >> 1);
+        actuator->a10_i += (temp_coeffs[1] >> 2) + (temp_coeffs[1] >> 1);
+        actuator->a30_r += (temp_coeffs[2] >> 2) + (temp_coeffs[2] >> 1);
+        actuator->a30_i += (temp_coeffs[3] >> 2) + (temp_coeffs[3] >> 1);
+        actuator->a50_r += (temp_coeffs[4] >> 2) + (temp_coeffs[4] >> 1);
+        actuator->a50_i += (temp_coeffs[5] >> 2) + (temp_coeffs[5] >> 1);
+    }
+
+    synch_barrier();
+}

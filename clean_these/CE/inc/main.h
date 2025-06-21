@@ -30,7 +30,7 @@
 
 
 
-#define PARALLEL
+//#define PARALLEL
 #define NUM_SETS 7
 #define NUM_THREADS 8
 #define SET_SIZE 500
@@ -40,58 +40,7 @@
 #define PROFILE
 //define DEBUG     // Uncomment for debug mode to print intermediate values
 //#define TEST      // Uncomment for test mode to include test-specific headers and variables
-#ifdef TEST
-//#include "arrays/post_dist_out_i.h"
-//#include "arrays/post_dist_out_r.h"
-//#include "arrays/subset1/y_h_e_1_i.h"
-//#include "arrays/subset1/y_h_e_1_r.h"
-//#include "arrays/subset1/y_h_e_2_i.h"  
-//#include "arrays/subset1/y_h_e_2_r.h"
-//#include "arrays/subset1/y_h_e_3_i.h"
-//#include "arrays/subset1/y_h_e_3_r.h"
-//#include "arrays/subset1/y_h_y_11.h"
-//#include "arrays/subset1/y_h_y_12.h"
-//#include "arrays/subset1/y_h_y_13.h"   
-//#include "arrays/subset1/y_h_y_23.h"
-//#include "arrays/subset1/y_h_y_33.h"
-//#include "arrays/outer_loop/y_h_y_11_mi.h"
-//#include "arrays/outer_loop/y_h_y_21_mi.h"
-//#include "arrays/outer_loop/y_h_y_31_mi.h"
-//#include "arrays/outer_loop/y_h_y_32_mi.h"
-//#include "arrays/outer_loop/y_h_y_33_mi.h"
-//
-//#include "arrays/outer_loop/y_h_y_inverse_11.h"
-//#include "arrays/outer_loop/y_h_y_inverse_21.h"
-//#include "arrays/outer_loop/y_h_y_inverse_22.h"
-//#include "arrays/outer_loop/y_h_y_inverse_31.h"
-//#include "arrays/outer_loop/y_h_y_inverse_32.h"
-//#include "arrays/outer_loop/y_h_y_inverse_33.h"
-//
-//#include "arrays/outer_loop/inv_11.h"
-//#include "arrays/outer_loop/inv_21.h"
-//#include "arrays/outer_loop/inv_22.h"
-//#include "arrays/outer_loop/inv_31.h"
-//#include "arrays/outer_loop/inv_32.h"
-//#include "arrays/outer_loop/inv_33.h"
-//
-//#include "arrays/outer_loop/a10_r.h"
-//#include "arrays/outer_loop/a10_i.h"
-//#include "arrays/outer_loop/a30_r.h"
-//#include "arrays/outer_loop/a30_i.h"
-//#include "arrays/outer_loop/a50_r.h"
-////#include "arrays/outer_loop/a50_i.h"
-////#include "arrays/outer_loop/inv_11.h"
-////#include "arrays/outer_loop/inv_21.h"
-////#include "arrays/outer_loop/inv_22.h"
-////#include "arrays/outer_loop/inv_31.h"
-////#include "arrays/outer_loop/inv_32.h"
-////#include "arrays/outer_loop/inv_33.h"
-//#include "arrays/outer_loop/y_h_y_11_mi.h"
-//#include "arrays/outer_loop/y_h_y_21_mi.h"
-//#include "arrays/outer_loop/y_h_y_31_mi.h"
-//#include "arrays/outer_loop/y_h_y_32_mi.h"
-//#include "arrays/outer_loop/y_h_y_33_mi.h"
-#endif // TEST
+
 
 
 typedef struct {
@@ -120,16 +69,6 @@ static inline int statistical_analysis(double in_r, double in_i, double out_r, d
     if (in_i < (stats->min_i)) {
         (stats->min_i) = in_i;
     }
- /*
-    // Write the input values to the file
-    printf(("%d)\n",stats->count);
-    printf("in_r=%lf\n", in_r);
-    printf("in_i=%lf\n", in_i);
-    printf("out_r=%lf\n", out_r);
-    printf("out_i=%lf\n", out_i);
-    printf("expected_out_r=%lf\n", expected_out_r);
-    printf("expected_out_i=%lf\n\n", expected_out_i);
- */
     return 0;
 }
 

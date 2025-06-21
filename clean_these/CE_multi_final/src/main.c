@@ -35,24 +35,12 @@ int main(){
     if (rt_cluster_id() != 0) {
         return bench_cluster_forward(0);
     }
-int time = 0;
     // Get the core ID of the current thread
     int core_id = rt_core_id();
     int num_cores = get_core_num();
     printf("Core ID: %d, Number of cores: %d\n", core_id, num_cores);
-   /*
-    #ifdef PROFILE
-    if(core_id==0){
-        enable_perf_cnt();
-        rst_start_perf_cnt();
-        config_perf_cnt();
-           
-    }
-#endif
-*/
 
-Actuator_S actuator = {0};
-
+    Actuator_S actuator = {0};
 
     // synchronize all cores before starting the computation
     synch_barrier();

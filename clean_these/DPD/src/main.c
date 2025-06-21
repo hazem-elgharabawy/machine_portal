@@ -20,8 +20,9 @@ static int thread_wrong_counts[NUM_THREADS] = {0};
 #endif
 
 int main() {
-int time = 0;
+
 #ifdef PARALLEL
+
     if (rt_cluster_id() != 0)
         return bench_cluster_forward(0);
     // Get the core ID of the current thread
@@ -94,7 +95,16 @@ int time = 0;
         printf("Wrong count: %d\n", total_wrong);
     
     }
-    
+    #endif
+    #ifdef PROFILE
+        if ( core_id == 0 ) {
+            stop_timer();
+            int cycles = get_time();
+          }
+        // stop performance counters
+         perf_stop();
+        if(core_id == 0)
+            printf("DPD took %d cycles on multi core\n",j+1,cycles);
     #endif
     return 0;
 
@@ -109,23 +119,23 @@ int time = 0;
     Actuator_S actuator = {0};  
 
     #ifdef PROFILE
-    // start performance counters
-    perf_reset();
-    perf_start();
-    #endif
-
+        // start performance counters
+        perf_reset();
+        perf_start();
         reset_timer();
         start_timer();
+    #endif
+
+
     // Processing loop
     for (int i = 0; i < DATA_SIZE; i++) {
-
 
         // Load input and expected output
         actuator.in_r = input_r[i];
         actuator.in_i = input_i[i];
     
         // Perform DPD operation
-        actuator_func_single(&actuator);
+        actuator_func(&actuator);
 
         // Store results in output arrays
         output_r[i] = actuator.out_r;
@@ -152,19 +162,22 @@ int time = 0;
         #endif
     }
 
-    
-        stop_timer();
-        time = get_time();
-    printf("DPD took %d cycles on single core\n", time);
+    #ifdef PROFILE
+        if ( core_id == 0 ) {
+            stop_timer();
+            int cycles = get_time();
+          }
+        // stop performance counters
+         perf_stop();
+        if(core_id == 0)
+            printf("DPD took %d cycles on multi core\n",j+1,cycles);
+    #endif
   
     #ifdef TEST
         print_analysis_report(&correct_stats, &wrong_stats);
     #endif
 
-
-#endif
-  
-
     return 0;  // Return success
+#endif
 }
 
