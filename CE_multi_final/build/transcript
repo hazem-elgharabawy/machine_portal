@@ -1,7 +1,7 @@
 # source /home/ICer/Desktop/ISOLATION/pulp/sim/tcl_files/config/run_and_exit.tcl
 # source /home/ICer/Desktop/ISOLATION/pulp/sim/tcl_files/run.tcl
 # vsim -c -quiet vopt_tb -L models_lib -L vip_lib -t ps "+nowarnTRAN" "+nowarnTSCALE" "+nowarnTFMPC" "+TB_PATH=/home/ICer/Desktop/ISOLATION/pulp/sim/../../fe/tb/" "+UVM_NO_RELNOTES" "+ENTRY_POINT=0x1c008080" -permit_unmatched_virtual_intf "+VSIM_PATH=/home/ICer/Desktop/ISOLATION/pulp/sim" -gUSE_SDVT_SPI=0 -gUSE_SDVT_CPI=0 -gBAUDRATE=115200 -gENABLE_DEV_DPI=0 -gLOAD_L2=JTAG -gUSE_SDVT_I2S=0 
-# Start time: 10:51:53 on Jun 19,2025
+# Start time: 09:02:45 on Jun 20,2025
 # //  Questa Sim-64
 # //  Version 10.7c linux_x86_64 Aug 17 2018
 # //
@@ -94,7 +94,23 @@
 # [pulp_tap_if] WRITE32 burst @1c003000 for        1024 bytes.
 # [pulp_tap_if] WRITE32 burst @1c003400 for        1024 bytes.
 # [pulp_tap_if] WRITE32 burst @1c003800 for        1024 bytes.
-# [pulp_tap_if] WRITE32 burst @1c003c00 for         488 bytes.
+# [pulp_tap_if] WRITE32 burst @1c003c00 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c004000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c004400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c004800 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c004c00 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c005000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c005400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c005800 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c005c00 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c006000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c006400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c006800 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c006c00 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c007000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c007400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c007800 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c007c00 for          40 bytes.
 # [pulp_tap_if] WRITE32 burst @1c008000 for        1024 bytes.
 # [pulp_tap_if] WRITE32 burst @1c008400 for        1024 bytes.
 # [pulp_tap_if] WRITE32 burst @1c008800 for        1024 bytes.
@@ -114,76 +130,129 @@
 # [pulp_tap_if] WRITE32 burst @1c00c000 for        1024 bytes.
 # [pulp_tap_if] WRITE32 burst @1c00c400 for        1024 bytes.
 # [pulp_tap_if] WRITE32 burst @1c00c800 for         704 bytes.
-# [TB] 28669801ns - Resuming the CORE
-# [TB] 28728601ns retrying debug reg access
-# [TB] 28757901ns retrying debug reg access
-# [TB] 28787201ns retrying debug reg access
-# [TB] 28816501ns retrying debug reg access
-# [TB] 28845801ns retrying debug reg access
-# [TB] 28875101ns retrying debug reg access
-# [TB] 28904401ns retrying debug reg access
-# [TB] 28933701ns retrying debug reg access
-# [TB] 28963001ns retrying debug reg access
-# [TB] 28992301ns retrying debug reg access
-# [TB] 29021601ns retrying debug reg access
-# [TB] 29050901ns retrying debug reg access
-# [TB] 29080201ns retrying debug reg access
-# [TB] 29109501ns retrying debug reg access
-# [TB] 29138801ns retrying debug reg access
-# [TB] 29168101ns retrying debug reg access
-# [TB] 29197401ns retrying debug reg access
-# [TB] 29226701ns retrying debug reg access
-# [TB] 29256001ns retrying debug reg access
-# [TB] 29285301ns retrying debug reg access
-# [TB] 29314601ns retrying debug reg access
-# [TB] 29343901ns retrying debug reg access
-# [TB] 29373201ns retrying debug reg access
-# [TB] 29402501ns retrying debug reg access
-# [TB] 29431801ns retrying debug reg access
-# [TB] 29461101ns retrying debug reg access
-# [TB] 30019801ns - Waiting for end of computation
+# [TB] 41593001ns - Resuming the CORE
+# [TB] 41651801ns retrying debug reg access
+# [TB] 41681101ns retrying debug reg access
+# [TB] 41710401ns retrying debug reg access
+# [TB] 41739701ns retrying debug reg access
+# [TB] 41769001ns retrying debug reg access
+# [TB] 41798301ns retrying debug reg access
+# [TB] 41827601ns retrying debug reg access
+# [TB] 41856901ns retrying debug reg access
+# [TB] 41886201ns retrying debug reg access
+# [TB] 41915501ns retrying debug reg access
+# [TB] 41944801ns retrying debug reg access
+# [TB] 41974101ns retrying debug reg access
+# [TB] 42003401ns retrying debug reg access
+# [TB] 42032701ns retrying debug reg access
+# [TB] 42062001ns retrying debug reg access
+# [TB] 42091301ns retrying debug reg access
+# [TB] 42120601ns retrying debug reg access
+# [TB] 42149901ns retrying debug reg access
+# [TB] 42179201ns retrying debug reg access
+# [TB] 42208501ns retrying debug reg access
+# [TB] 42237801ns retrying debug reg access
+# [TB] 42267101ns retrying debug reg access
+# [TB] 42296401ns retrying debug reg access
+# [TB] 42325701ns retrying debug reg access
+# [TB] 42355001ns retrying debug reg access
+# [TB] 42913701ns - Waiting for end of computation
 # [STDOUT-CL0_PE0] Core ID: 0, Number of cores: 8
 # [STDOUT-CL0_PE1] Core ID: 1, Number of cores: 8
-# [STDOUT-CL0_PE2] Core ID: 2, Number of cores: 8
 # [STDOUT-CL0_PE3] Core ID: 3, Number of cores: 8
+# [STDOUT-CL0_PE2] Core ID: 2, Number of cores: 8
 # [STDOUT-CL0_PE4] Core ID: 4, Number of cores: 8
 # [STDOUT-CL0_PE5] Core ID: 5, Number of cores: 8
 # [STDOUT-CL0_PE6] Core ID: 6, Number of cores: 8
 # [STDOUT-CL0_PE7] Core ID: 7, Number of cores: 8
 # [STDOUT-CL0_PE0] Set 1 Coefficients:
-# [STDOUT-CL0_PE0] a10_r: MATLAB=1.008800, SW=1.003906, HW=1.038086
-# [STDOUT-CL0_PE0] a10_i: MATLAB=-0.007700, SW=-0.001953, HW=0.124023
-# [STDOUT-CL0_PE0] a30_r: MATLAB=-0.095100, SW=-0.052734, HW=-0.045898
-# [STDOUT-CL0_PE0] a30_i: MATLAB=-0.267000, SW=-0.186523, HW=-0.146484
-# [STDOUT-CL0_PE0] a50_r: MATLAB=0.061900, SW=-0.022461, HW=-0.026367
-# [STDOUT-CL0_PE0] a50_i: MATLAB=0.185100, SW=0.043945, HW=0.093750
-# [STDOUT-CL0_PE0] Errors (MATLAB - SW): a10_r=0.004894, a10_i=0.005747, a30_r=0.042366, a30_i=0.080477, a50_r=0.084361, a50_i=0.141155
-# [STDOUT-CL0_PE0] Errors (MATLAB - HW): a10_r=0.029286, a10_i=0.131723, a30_r=0.049202, a30_i=0.120516, a50_r=0.088267, a50_i=0.091350
-# [STDOUT-CL0_PE0] Set 1: MSE (SW)=0.005895, MSE (HW)=0.008548, Ratio=0.690SW is (31.0% better)
+# [STDOUT-CL0_PE0] a10_r: MATLAB=1.014600, SW=1.006836, HW=1.038086
+# [STDOUT-CL0_PE0] a10_i: MATLAB=-0.012700, SW=-0.016602, HW=0.124023
+# [STDOUT-CL0_PE0] a30_r: MATLAB=-0.157800, SW=-0.098633, HW=-0.045898
+# [STDOUT-CL0_PE0] a30_i: MATLAB=-0.442800, SW=-0.344727, HW=-0.146484
+# [STDOUT-CL0_PE0] a50_r: MATLAB=0.102600, SW=-0.048828, HW=-0.026367
+# [STDOUT-CL0_PE0] a50_i: MATLAB=0.307000, SW=0.059570, HW=0.093750
+# [STDOUT-CL0_PE0] (MATLAB - SW): a10_r=0.007764, a10_i=0.003902, a30_r=0.059167, a30_i=0.098073, a50_r=0.151428, a50_i=0.247430
+# [STDOUT-CL0_PE0] (MATLAB - HW): a10_r=0.023486, a10_i=0.136723, a30_r=0.111902, a30_i=0.296316, a50_r=0.128967, a50_i=0.213250
+# [STDOUT-CL0_PE0] Set 1: MSE (SW)=0.016224, MSE (HW)=0.030280, Ratio=0.536
+# [STDOUT-CL0_PE0] SW is 46.4% better
+# [STDOUT-CL0_PE0] ======================================================
 # [STDOUT-CL0_PE0] Set 2 Coefficients:
-# [STDOUT-CL0_PE0] a10_r: MATLAB=1.022500, SW=0.996094, HW=0.986328
-# [STDOUT-CL0_PE0] a10_i: MATLAB=-0.012800, SW=-0.033203, HW=0.072266
-# [STDOUT-CL0_PE0] a30_r: MATLAB=-0.200100, SW=0.038086, HW=0.543945
-# [STDOUT-CL0_PE0] a30_i: MATLAB=-0.570400, SW=-0.036133, HW=0.194336
-# [STDOUT-CL0_PE0] a50_r: MATLAB=0.135700, SW=-0.280273, HW=-1.179688
-# [STDOUT-CL0_PE0] a50_i: MATLAB=0.434600, SW=-0.400391, HW=-0.632813
-# [STDOUT-CL0_PE0] Errors (MATLAB - SW): a10_r=0.026406, a10_i=0.020403, a30_r=0.238186, a30_i=0.534267, a50_r=0.415973, a50_i=0.834991
-# [STDOUT-CL0_PE0] Errors (MATLAB - HW): a10_r=0.036172, a10_i=0.085066, a30_r=0.744045, a30_i=0.764736, a50_r=1.315387, a50_i=1.067413
-# [STDOUT-CL0_PE0] Set 2: MSE (SW)=0.202255, MSE (HW)=0.669430, Ratio=0.302SW is (69.8% better)
+# [STDOUT-CL0_PE0] a10_r: MATLAB=1.023000, SW=1.009766, HW=0.986328
+# [STDOUT-CL0_PE0] a10_i: MATLAB=-0.013700, SW=-0.060547, HW=0.072266
+# [STDOUT-CL0_PE0] a30_r: MATLAB=-0.207900, SW=-0.025391, HW=0.543945
+# [STDOUT-CL0_PE0] a30_i: MATLAB=-0.591500, SW=0.000977, HW=0.194336
+# [STDOUT-CL0_PE0] a50_r: MATLAB=0.140300, SW=-0.330078, HW=-1.179688
+# [STDOUT-CL0_PE0] a50_i: MATLAB=0.446300, SW=-0.680664, HW=-0.632813
+# [STDOUT-CL0_PE0] (MATLAB - SW): a10_r=0.013234, a10_i=0.046847, a30_r=0.182509, a30_i=0.592477, a50_r=0.470378, a50_i=1.126964
+# [STDOUT-CL0_PE0] (MATLAB - HW): a10_r=0.036672, a10_i=0.085966, a30_r=0.751845, a30_i=0.785836, a50_r=1.319988, a50_i=1.079112
+# [STDOUT-CL0_PE0] Set 2: MSE (SW)=0.313002, MSE (HW)=0.683066, Ratio=0.458
+# [STDOUT-CL0_PE0] SW is 54.2% better
+# [STDOUT-CL0_PE0] ======================================================
 # [STDOUT-CL0_PE0] Set 3 Coefficients:
-# [STDOUT-CL0_PE0] a10_r: MATLAB=1.023000, SW=1.005859, HW=1.007813
-# [STDOUT-CL0_PE0] a10_i: MATLAB=-0.015400, SW=-0.027344, HW=0.095703
-# [STDOUT-CL0_PE0] a30_r: MATLAB=-0.203700, SW=-0.055664, HW=0.134766
-# [STDOUT-CL0_PE0] a30_i: MATLAB=-0.579400, SW=-0.211914, HW=-0.256836
-# [STDOUT-CL0_PE0] a50_r: MATLAB=0.135000, SW=-0.156250, HW=-0.488281
-# [STDOUT-CL0_PE0] a50_i: MATLAB=0.418800, SW=-0.183594, HW=0.017578
-# [STDOUT-CL0_PE0] Errors (MATLAB - SW): a10_r=0.017141, a10_i=0.011944, a30_r=0.148036, a30_i=0.367486, a50_r=0.291250, a50_i=0.602394
-# [STDOUT-CL0_PE0] Errors (MATLAB - HW): a10_r=0.015187, a10_i=0.111103, a30_r=0.338466, a30_i=0.322564, a50_r=0.623281, a50_i=0.401222
-# [STDOUT-CL0_PE0] Set 3: MSE (SW)=0.100850, MSE (HW)=0.130107, Ratio=0.775SW is (22.5% better)
-# [TB] 42558501ns - Received status core: 0x00000000
+# [STDOUT-CL0_PE0] a10_r: MATLAB=1.023500, SW=1.018555, HW=1.007813
+# [STDOUT-CL0_PE0] a10_i: MATLAB=-0.017200, SW=-0.031250, HW=0.095703
+# [STDOUT-CL0_PE0] a30_r: MATLAB=-0.207900, SW=-0.159180, HW=0.134766
+# [STDOUT-CL0_PE0] a30_i: MATLAB=-0.590400, SW=-0.385742, HW=-0.256836
+# [STDOUT-CL0_PE0] a50_r: MATLAB=0.135700, SW=-0.056641, HW=-0.488281
+# [STDOUT-CL0_PE0] a50_i: MATLAB=0.411800, SW=-0.005859, HW=0.017578
+# [STDOUT-CL0_PE0] (MATLAB - SW): a10_r=0.004945, a10_i=0.014050, a30_r=0.048720, a30_i=0.204658, a50_r=0.192341, a50_i=0.417659
+# [STDOUT-CL0_PE0] (MATLAB - HW): a10_r=0.015688, a10_i=0.112903, a30_r=0.342666, a30_i=0.333564, a50_r=0.623981, a50_i=0.394222
+# [STDOUT-CL0_PE0] Set 3: MSE (SW)=0.042652, MSE (HW)=0.131074, Ratio=0.325
+# [STDOUT-CL0_PE0] SW is 67.5% better
+# [STDOUT-CL0_PE0] ======================================================
+# [STDOUT-CL0_PE0] Set 4 Coefficients:
+# [STDOUT-CL0_PE0] a10_r: MATLAB=1.024200, SW=1.021484, HW=1.004883
+# [STDOUT-CL0_PE0] a10_i: MATLAB=-0.016800, SW=-0.018555, HW=0.102539
+# [STDOUT-CL0_PE0] a30_r: MATLAB=-0.217100, SW=-0.199219, HW=-0.002930
+# [STDOUT-CL0_PE0] a30_i: MATLAB=-0.597500, SW=-0.520508, HW=-0.323242
+# [STDOUT-CL0_PE0] a50_r: MATLAB=0.145500, SW=0.043945, HW=-0.217773
+# [STDOUT-CL0_PE0] a50_i: MATLAB=0.420300, SW=0.226563, HW=0.231445
+# [STDOUT-CL0_PE0] (MATLAB - SW): a10_r=0.002716, a10_i=0.001755, a30_r=0.017881, a30_i=0.076992, a50_r=0.101555, a50_i=0.193738
+# [STDOUT-CL0_PE0] (MATLAB - HW): a10_r=0.019317, a10_i=0.119339, a30_r=0.214170, a30_i=0.274258, a50_r=0.363273, a50_i=0.188855
+# [STDOUT-CL0_PE0] Set 4: MSE (SW)=0.009018, MSE (HW)=0.050556, Ratio=0.178
+# [STDOUT-CL0_PE0] SW is 82.2% better
+# [STDOUT-CL0_PE0] ======================================================
+# [STDOUT-CL0_PE0] Set 5 Coefficients:
+# [STDOUT-CL0_PE0] a10_r: MATLAB=1.025900, SW=1.004883, HW=0.979492
+# [STDOUT-CL0_PE0] a10_i: MATLAB=-0.013700, SW=-0.039063, HW=0.062500
+# [STDOUT-CL0_PE0] a30_r: MATLAB=-0.219400, SW=-0.013672, HW=0.276367
+# [STDOUT-CL0_PE0] a30_i: MATLAB=-0.638200, SW=-0.308594, HW=0.063477
+# [STDOUT-CL0_PE0] a50_r: MATLAB=0.143700, SW=-0.301758, HW=-0.708984
+# [STDOUT-CL0_PE0] a50_i: MATLAB=0.491100, SW=-0.132813, HW=-0.430664
+# [STDOUT-CL0_PE0] (MATLAB - SW): a10_r=0.021017, a10_i=0.025362, a30_r=0.205728, a30_i=0.329606, a50_r=0.445458, a50_i=0.623912
+# [STDOUT-CL0_PE0] (MATLAB - HW): a10_r=0.046408, a10_i=0.076200, a30_r=0.495767, a30_i=0.701677, a50_r=0.852684, a50_i=0.921764
+# [STDOUT-CL0_PE0] Set 5: MSE (SW)=0.123291, MSE (HW)=0.387136, Ratio=0.318
+# [STDOUT-CL0_PE0] SW is 68.2% better
+# [STDOUT-CL0_PE0] ======================================================
+# [STDOUT-CL0_PE0] Set 6 Coefficients:
+# [STDOUT-CL0_PE0] a10_r: MATLAB=1.026100, SW=1.014648, HW=0.997070
+# [STDOUT-CL0_PE0] a10_i: MATLAB=-0.013400, SW=-0.023438, HW=0.144531
+# [STDOUT-CL0_PE0] a30_r: MATLAB=-0.223800, SW=-0.116211, HW=0.048828
+# [STDOUT-CL0_PE0] a30_i: MATLAB=-0.628900, SW=-0.472656, HW=-0.282227
+# [STDOUT-CL0_PE0] a50_r: MATLAB=0.154400, SW=-0.119141, HW=-0.336914
+# [STDOUT-CL0_PE0] a50_i: MATLAB=0.466000, SW=0.125977, HW=-0.008789
+# [STDOUT-CL0_PE0] (MATLAB - SW): a10_r=0.011452, a10_i=0.010037, a30_r=0.107589, a30_i=0.156244, a50_r=0.273541, a50_i=0.340023
+# [STDOUT-CL0_PE0] (MATLAB - HW): a10_r=0.029030, a10_i=0.157931, a30_r=0.272628, a30_i=0.346673, a50_r=0.491314, a50_i=0.474789
+# [STDOUT-CL0_PE0] Set 6: MSE (SW)=0.037777, MSE (HW)=0.114518, Ratio=0.330
+# [STDOUT-CL0_PE0] SW is 67.0% better
+# [STDOUT-CL0_PE0] ======================================================
+# [STDOUT-CL0_PE0] Set 7 Coefficients:
+# [STDOUT-CL0_PE0] a10_r: MATLAB=1.026400, SW=1.032227, HW=1.017578
+# [STDOUT-CL0_PE0] a10_i: MATLAB=-0.013500, SW=-0.023438, HW=0.139648
+# [STDOUT-CL0_PE0] a30_r: MATLAB=-0.223800, SW=-0.238281, HW=-0.137695
+# [STDOUT-CL0_PE0] a30_i: MATLAB=-0.633200, SW=-0.457031, HW=-0.401367
+# [STDOUT-CL0_PE0] a50_r: MATLAB=0.154800, SW=0.040039, HW=-0.078125
+# [STDOUT-CL0_PE0] a50_i: MATLAB=0.471100, SW=0.108398, HW=0.232422
+# [STDOUT-CL0_PE0] (MATLAB - SW): a10_r=0.005827, a10_i=0.009938, a30_r=0.014481, a30_i=0.176169, a50_r=0.114761, a50_i=0.362702
+# [STDOUT-CL0_PE0] (MATLAB - HW): a10_r=0.008822, a10_i=0.153148, a30_r=0.086105, a30_i=0.231833, a50_r=0.232925, a50_i=0.238678
+# [STDOUT-CL0_PE0] Set 7: MSE (SW)=0.029350, MSE (HW)=0.032652, Ratio=0.899
+# [STDOUT-CL0_PE0] SW is 10.1% better
+# [STDOUT-CL0_PE0] ======================================================
+# [TB] 68497001ns - Received status core: 0x00000000
 # ** Note: $stop    : /home/ICer/Desktop/ISOLATION/pulp/rtl/tb/tb_pulp.sv(1008)
-#    Time: 42558501 ns  Iteration: 0  Instance: /tb_pulp
+#    Time: 68497001 ns  Iteration: 0  Instance: /tb_pulp
 # Break at /home/ICer/Desktop/ISOLATION/pulp/rtl/tb/tb_pulp.sv line 1008
 # Stopped at /home/ICer/Desktop/ISOLATION/pulp/rtl/tb/tb_pulp.sv line 1008
-# End time: 11:00:15 on Jun 19,2025, Elapsed time: 0:08:22
+# End time: 09:17:30 on Jun 20,2025, Elapsed time: 0:14:45
 # Errors: 4, Warnings: 12

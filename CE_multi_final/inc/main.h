@@ -89,9 +89,9 @@
 #endif // TEST
 
 #define MARGIN 0.05
-#define NUM_SETS 3
+#define NUM_SETS 7
 #define NUM_THREADS 8
-#define SET_SIZE 499
+#define SET_SIZE 500
 #define USE_SW_COEFFS
 //#define USE_HW_COEFFS
 //#define USE_MATLAB_COEFFS

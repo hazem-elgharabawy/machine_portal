@@ -1,0 +1,4 @@
+riscv32-unknown-elf-objdump -Mmarch=rv32imcxgap9 -mnohwloop -d /home/ICer/Desktop/ISOLATION/regression_tests/DPD/build/test/test
+
+/home/ICer/Desktop/ISOLATION/regression_tests/DPD/build/test/test:     file format elf32-littleriscv
+

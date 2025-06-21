@@ -1,0 +1,157 @@
+# source /home/ICer/Desktop/ISOLATION/pulp/sim/tcl_files/config/run_and_exit.tcl
+# source /home/ICer/Desktop/ISOLATION/pulp/sim/tcl_files/run.tcl
+# vsim -c -quiet vopt_tb -L models_lib -L vip_lib -t ps "+nowarnTRAN" "+nowarnTSCALE" "+nowarnTFMPC" "+TB_PATH=/home/ICer/Desktop/ISOLATION/pulp/sim/../../fe/tb/" "+UVM_NO_RELNOTES" "+ENTRY_POINT=0x1c008080" -permit_unmatched_virtual_intf "+VSIM_PATH=/home/ICer/Desktop/ISOLATION/pulp/sim" -gUSE_SDVT_SPI=0 -gUSE_SDVT_CPI=0 -gBAUDRATE=115200 -gENABLE_DEV_DPI=0 -gLOAD_L2=JTAG -gUSE_SDVT_I2S=0 
+# Start time: 20:59:37 on Jun 21,2025
+# //  Questa Sim-64
+# //  Version 10.7c linux_x86_64 Aug 17 2018
+# //
+# //  Copyright 1991-2018 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# ** Error: (vsim-191) Questa has encountered an unexpected internal error: ../../src/vsim/vsimfunc.c(1989). 
+# Please contact Questa support at http://supportnet.mentor.com
+# ** Error: (vsim-191) Questa has encountered an unexpected internal error: ../../src/vsim/vsimfunc.c(1989). 
+# Please contact Questa support at http://supportnet.mentor.com
+# ** Error: (vsim-191) Questa has encountered an unexpected internal error: ../../src/vsim/vsimfunc.c(1989). 
+# Please contact Questa support at http://supportnet.mentor.com
+# ** Error: (vsim-191) Questa has encountered an unexpected internal error: ../../src/vsim/vsimfunc.c(1989). 
+# Please contact Questa support at http://supportnet.mentor.com
+# ** Warning: (vsim-3015) [PCDPC] - Port size (16) does not match connection size (1) for port 'ext_perf_counters_i'. The port definition is at: /home/ICer/Desktop/ISOLATION/pulp/working_dir/cv32e40p/rtl/riscv_core.sv(125).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/fc_subsystem_i/FC_CORE/lFC_CORE File: /home/ICer/Desktop/ISOLATION/pulp/.bender/git/checkouts/pulp_soc-4c88b5a9036758e8/rtl/fc/fc_subsystem.sv Line: 131
+# ** Warning: (vsim-3770) Failed to find user specified function 'jtag_tick' in DPI C/C++ source files.
+#    Time: 0 ps  Iteration: 0  Region: /SimJTAG_sv_unit File: /home/ICer/Desktop/ISOLATION/pulp/rtl/tb/SimJTAG.sv
+# ** Warning: (vsim-8683) Uninitialized out port /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/i_clk_rst_gen/i_fll_soc/i_FLL_digital/TQ has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/i_clk_rst_gen/i_fll_soc/i_FLL_digital/JTQ has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/i_clk_rst_gen/i_fll_per/i_FLL_digital/TQ has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/i_clk_rst_gen/i_fll_per/i_FLL_digital/JTQ has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/i_clk_rst_gen/i_fll_cluster/i_FLL_digital/TQ has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/i_clk_rst_gen/i_fll_cluster/i_FLL_digital/JTQ has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-3040) Command line generic/parameter "USE_SDVT_I2S" not found in design.
+# ** Warning: (vsim-3040) Command line generic/parameter "USE_SDVT_SPI" not found in design.
+#  run_and_exit
+# [CORE] Core settings: PULP_SECURE =           1, N_PMP_ENTRIES =          16, N_PMP_CFG           4
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 0  Process: /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/fc_subsystem_i/FC_CORE/lFC_CORE/RISCY_PMP/pmp_unit_i/<anonymous> File: /home/ICer/Desktop/ISOLATION/pulp/working_dir/cv32e40p/rtl/riscv_pmp.sv Line: 677
+# [CORE] Core settings: PULP_SECURE =           0, N_PMP_ENTRIES =          16, N_PMP_CFG           4
+# [CORE] Core settings: PULP_SECURE =           0, N_PMP_ENTRIES =          16, N_PMP_CFG           4
+# [CORE] Core settings: PULP_SECURE =           0, N_PMP_ENTRIES =          16, N_PMP_CFG           4
+# [CORE] Core settings: PULP_SECURE =           0, N_PMP_ENTRIES =          16, N_PMP_CFG           4
+# [CORE] Core settings: PULP_SECURE =           0, N_PMP_ENTRIES =          16, N_PMP_CFG           4
+# [CORE] Core settings: PULP_SECURE =           0, N_PMP_ENTRIES =          16, N_PMP_CFG           4
+# [CORE] Core settings: PULP_SECURE =           0, N_PMP_ENTRIES =          16, N_PMP_CFG           4
+# [CORE] Core settings: PULP_SECURE =           0, N_PMP_ENTRIES =          16, N_PMP_CFG           4
+# [TB]       0ns - Entry point is set to 0x1c008080
+# [TB]       0ns - Asserting hard reset
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 1  Process: /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/fc_subsystem_i/FC_CORE/lFC_CORE/RISCY_PMP/pmp_unit_i/<anonymous> File: /home/ICer/Desktop/ISOLATION/pulp/working_dir/cv32e40p/rtl/riscv_pmp.sv Line: 677
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 2  Process: /tb_pulp/i_dut/soc_domain_i/pulp_soc_i/fc_subsystem_i/FC_CORE/lFC_CORE/RISCY_PMP/pmp_unit_i/<anonymous> File: /home/ICer/Desktop/ISOLATION/pulp/working_dir/cv32e40p/rtl/riscv_pmp.sv Line: 677
+# [TB]       1ns - Using FLL
+# [TB]       1ns - Not using CAM SDVT
+# Loading default stimuli
+# [JTAG] SoftReset Done(    701ns)
+# [JTAG] Bypass Test Passed (  33301ns)
+# [JTAG] Tap ID: 249511c3 (  43701ns)
+# [JTAG] Tap ID Test PASSED (  43701ns)
+# [test_mode_if]   50301ns - Init
+# [TB]   50301ns - Enabling clock out via jtag
+# [test_mode_if]   51801ns - Setting confreg to value 002.
+# [TB]   51801ns - jtag_conf_reg set to 002
+# [TB]   51801ns - Releasing hard reset
+# [TB]   53401ns - Init PULP TAP
+# [pulp_tap_if] WRITE32 burst @1c008080 for           4 bytes.
+# [TB]   67501ns - Write32 PULP TAP
+# [JTAG] R/W test of L2 succeeded
+# [TB]  177701ns - Halting the Core
+# [TB]  236501ns - Writing the boot address into dpc
+# [TB]  280601ns - Loading L2
+# [JTAG] Loading L2 with pulp tap jtag interface
+# [pulp_tap_if] WRITE32 burst @10000000 for           8 bytes.
+# [pulp_tap_if] WRITE32 burst @1c000000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c000400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c000800 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c000c00 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c001000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c001400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c001800 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c001c00 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c002000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c002400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c002800 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c002c00 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c003000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c003400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c003800 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c003c00 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c004000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c004400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c004800 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c004c00 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c005000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c005400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c005800 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c005c00 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c006000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c006400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c006800 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c006c00 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c007000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c007400 for         552 bytes.
+# [pulp_tap_if] WRITE32 burst @1c008000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c008400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c008800 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c008c00 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c009000 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c009400 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c009800 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c009c00 for        1024 bytes.
+# [pulp_tap_if] WRITE32 burst @1c00a000 for          32 bytes.
+# [TB] 31503801ns - Resuming the CORE
+# [TB] 31562601ns retrying debug reg access
+# [TB] 31591901ns retrying debug reg access
+# [TB] 31621201ns retrying debug reg access
+# [TB] 31650501ns retrying debug reg access
+# [TB] 31679801ns retrying debug reg access
+# [TB] 31709101ns retrying debug reg access
+# [TB] 31738401ns retrying debug reg access
+# [TB] 31767701ns retrying debug reg access
+# [TB] 31797001ns retrying debug reg access
+# [TB] 31826301ns retrying debug reg access
+# [TB] 31855601ns retrying debug reg access
+# [TB] 31884901ns retrying debug reg access
+# [TB] 31914201ns retrying debug reg access
+# [TB] 31943501ns retrying debug reg access
+# [TB] 31972801ns retrying debug reg access
+# [TB] 32002101ns retrying debug reg access
+# [TB] 32031401ns retrying debug reg access
+# [TB] 32060701ns retrying debug reg access
+# [TB] 32090001ns retrying debug reg access
+# [TB] 32119301ns retrying debug reg access
+# [TB] 32148601ns retrying debug reg access
+# [TB] 32177901ns retrying debug reg access
+# [TB] 32207201ns retrying debug reg access
+# [TB] 32236501ns retrying debug reg access
+# [TB] 32265801ns retrying debug reg access
+# [TB] 32824501ns - Waiting for end of computation
+# [STDOUT-CL31_PE0] all sets took 637124 cycles on single core 
+# [TB] 46280801ns - Received status core: 0x00000000
+# ** Note: $stop    : /home/ICer/Desktop/ISOLATION/pulp/rtl/tb/tb_pulp.sv(1008)
+#    Time: 46280801 ns  Iteration: 0  Instance: /tb_pulp
+# Break at /home/ICer/Desktop/ISOLATION/pulp/rtl/tb/tb_pulp.sv line 1008
+# Stopped at /home/ICer/Desktop/ISOLATION/pulp/rtl/tb/tb_pulp.sv line 1008
+# End time: 21:05:47 on Jun 21,2025, Elapsed time: 0:06:10
+# Errors: 4, Warnings: 13
