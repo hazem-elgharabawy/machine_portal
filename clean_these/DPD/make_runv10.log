@@ -1,0 +1,152 @@
+Setting platform to rtl
+ln -s /home/ICer/Desktop/ref/pulpissimo/build/questasim/modelsim.ini /home/ICer/Desktop/ref/pulp-rt-examples/DPD/build/modelsim.ini
+ln -s /home/ICer/Desktop/ref/pulpissimo/build/questasim/work /home/ICer/Desktop/ref/pulp-rt-examples/DPD/build/work
+ln -s /home/ICer/Desktop/ref/pulpissimo/build/questasim/boot /home/ICer/Desktop/ref/pulp-rt-examples/DPD/build/boot
+ln -s /home/ICer/Desktop/ref/pulpissimo/build/questasim/tcl_files /home/ICer/Desktop/ref/pulp-rt-examples/DPD/build/tcl_files
+mkdir -p /home/ICer/Desktop/ref/pulp-rt-examples/DPD/build/stdout
+mkdir -p /home/ICer/Desktop/ref/pulp-rt-examples/DPD/build/fs
+ln -s /home/ICer/Desktop/ref/pulpissimo/build/questasim/waves /home/ICer/Desktop/ref/pulp-rt-examples/DPD/build/waves
+/home/ICer/Desktop/ref/pulpissimo/sw/pulp-runtime/bin/stim_utils.py --binary=/home/ICer/Desktop/ref/pulp-rt-examples/DPD/build/test/test --vectors=/home/ICer/Desktop/ref/pulp-rt-examples/DPD/build/vectors/stim.txt
+Created stimuli generator
+  Added binary: /home/ICer/Desktop/ref/pulp-rt-examples/DPD/build/test/test
+  Handling section (base: 0x1c000004, size: 0xb14)
+  Init section to 0 (base: 0x1c000b18, size: 0x24)
+  Handling section (base: 0x1c008000, size: 0x1814)
+  Generating to file: /home/ICer/Desktop/ref/pulp-rt-examples/DPD/build/vectors/stim.txt
+/home/ICer/Desktop/ref/pulpissimo/sw/pulp-runtime/bin/plp_mkflash  --flash-boot-binary=/home/ICer/Desktop/ref/pulp-rt-examples/DPD/build/test/test  --stimuli=/home/ICer/Desktop/ref/pulp-rt-examples/DPD/build/vectors/qspi_stim.slm --flash-type=spi --qpi
+/home/ICer/Desktop/ref/pulpissimo/sw/pulp-runtime/bin/slm_hyper.py  --input=/home/ICer/Desktop/ref/pulp-rt-examples/DPD/build/vectors/qspi_stim.slm  --output=/home/ICer/Desktop/ref/pulp-rt-examples/DPD/build/vectors/hyper_stim.slm
+cd /home/ICer/Desktop/ref/pulp-rt-examples/DPD/build && export VSIM_RUNNER_FLAGS='+ENTRY_POINT=0x1c008080 -permit_unmatched_virtual_intf -gBAUDRATE=115200 +bootmode=jtag' && vsim -64 -c -do 'source /home/ICer/Desktop/ref/pulpissimo/build/questasim/tcl_files/config/run_and_exit.tcl' -do 'source /home/ICer/Desktop/ref/pulpissimo/build/questasim/tcl_files/run.tcl; run_and_exit;'
+Reading pref.tcl
+
+# 10.7c
+
+# source /home/ICer/Desktop/ref/pulpissimo/build/questasim/tcl_files/config/run_and_exit.tcl
+# source /home/ICer/Desktop/ref/pulpissimo/build/questasim/tcl_files/run.tcl
+# vsim -c -quiet vopt_tb -t ps "+nowarnTRAN" "+nowarnTSCALE" "+nowarnTFMPC" -suppress 8386 "+UVM_NO_RELNOTES" "+ENTRY_POINT=0x1c008080" -permit_unmatched_virtual_intf "+bootmode=jtag" -gBAUDRATE=115200 
+# Start time: 00:17:28 on May 09,2025
+# //  Questa Sim-64
+# //  Version 10.7c linux_x86_64 Aug 17 2018
+# //
+# //  Copyright 1991-2018 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# ** Warning: (vsim-3770) Failed to find user specified function 'jtag_tick' in DPI precompiled library search list "/home/mentor/questasim/uvm-1.1d/linux_x86_64/uvm_dpi.so ".
+#    Time: 0 ps  Iteration: 0  Region: /SimJTAG_sv_unit File: /home/ICer/Desktop/ref/pulpissimo/target/sim/tb/tb_lib/SimJTAG.sv
+# ** Warning: (vsim-8683) Uninitialized out port /tb_pulp/i_dut/i_clock_gen/i_fll_soc/i_FLL_digital/TQ has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_pulp/i_dut/i_clock_gen/i_fll_soc/i_FLL_digital/JTQ has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_pulp/i_dut/i_clock_gen/i_fll_per/i_FLL_digital/TQ has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_pulp/i_dut/i_clock_gen/i_fll_per/i_FLL_digital/JTQ has no driver.
+# This port will contribute value (U) to the signal network.
+#  run_and_exit
+# ----------------------------------------------------------------
+# UVM-1.1d
+# (C) 2007-2013 Mentor Graphics Corporation
+# (C) 2007-2013 Cadence Design Systems, Inc.
+# (C) 2006-2013 Synopsys, Inc.
+# (C) 2011-2013 Cypress Semiconductor Corp.
+# ----------------------------------------------------------------
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(215) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(216) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
+# ** Warning: (vsim-7) Failed to open readmem file "/../rtl/vip/camera/img/frame0.img" in read mode.
+# No such file or directory. (errno = ENOENT)    : /home/ICer/Desktop/ref/pulpissimo/target/sim/vip/camera/cam_vip.sv(88)
+#    Time: 0 ps  Iteration: 0  Instance: /tb_pulp/genblk3/i_cam_vip
+# ** Warning: (vsim-7) Failed to open readmem file "/../rtl/vip/camera/img/frame1.img" in read mode.
+# No such file or directory. (errno = ENOENT)    : /home/ICer/Desktop/ref/pulpissimo/target/sim/vip/camera/cam_vip.sv(89)
+#    Time: 0 ps  Iteration: 0  Instance: /tb_pulp/genblk3/i_cam_vip
+# [cv32e40p_core]: PULP_XPULP = 1, PULP_CLUSTER =           0, FPU 1, PULP_ZFINX 0, NUM_MHPMCOUNTERS           1
+# [TB  ]       0ns - Asserting hard reset
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 0  Process: /tb_pulp/i_dut/i_soc_domain/i_pulp_soc/fc_subsystem_i/FC_CORE/FC_CORE_i/core_i/load_store_unit_i/#ALWAYS#418 File: /home/ICer/Desktop/ref/pulpissimo/working_dir/cv32e40p/rtl/cv32e40p_load_store_unit.sv Line: 419
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 0  Process: /tb_pulp/i_dut/i_soc_domain/i_pulp_soc/fc_subsystem_i/FC_CORE/FC_CORE_i/core_i/id_stage_i/#ALWAYS#784 File: /home/ICer/Desktop/ref/pulpissimo/working_dir/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 785
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 0  Process: /tb_pulp/i_dut/i_soc_domain/i_pulp_soc/fc_subsystem_i/FC_CORE/FC_CORE_i/core_i/id_stage_i/#ALWAYS#774 File: /home/ICer/Desktop/ref/pulpissimo/working_dir/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 775
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 0  Process: /tb_pulp/i_dut/i_soc_domain/i_pulp_soc/fc_subsystem_i/FC_CORE/FC_CORE_i/core_i/id_stage_i/#ALWAYS#768 File: /home/ICer/Desktop/ref/pulpissimo/working_dir/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 769
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 0  Process: /tb_pulp/i_dut/i_soc_domain/i_pulp_soc/fc_subsystem_i/FC_CORE/FC_CORE_i/core_i/id_stage_i/#ALWAYS#759 File: /home/ICer/Desktop/ref/pulpissimo/working_dir/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 760
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 0  Process: /tb_pulp/i_dut/i_soc_domain/i_pulp_soc/fc_subsystem_i/FC_CORE/FC_CORE_i/core_i/id_stage_i/#ALWAYS#753 File: /home/ICer/Desktop/ref/pulpissimo/working_dir/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 754
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 0  Process: /tb_pulp/i_dut/i_soc_domain/i_pulp_soc/fc_subsystem_i/FC_CORE/FC_CORE_i/core_i/id_stage_i/#ALWAYS#614(immediate_a_mux) File: /home/ICer/Desktop/ref/pulpissimo/working_dir/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 615
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 0  Process: /tb_pulp/i_dut/i_soc_domain/i_pulp_soc/fc_subsystem_i/FC_CORE/FC_CORE_i/core_i/id_stage_i/#ALWAYS#529 File: /home/ICer/Desktop/ref/pulpissimo/working_dir/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 530
+# [TB  ]       1ns - Using FLL
+# [TB  ]       1ns - Not using CAM SDVT
+# [TB  ]       1ns - Loading default stimuli
+# [TB  ]       1ns - Entry point is set to 0x1c008080
+# [JTAG]     701ns - Soft Reset Done
+# [JTAG]   33301ns - Bypass Test Passed
+# [JTAG]   43701ns - Tap ID: 50001db3
+# [JTAG]   43701ns - Tap ID Test PASSED
+# [TIF ]   50301ns - Init
+# [TB  ]   50301ns - Enabling clock out via jtag
+# [TB  ]   50301ns - jtag_conf_reg set to xxx
+# [TB  ]   50301ns - Releasing hard reset
+# [CORE_TRACER 992] Output filename is: trace_core_000003e0.log
+# [TB  ]   51901ns - Init PULP TAP
+# [PULP]   66001ns - WRITE32 burst @1c008080 for           4 bytes.
+# [TB  ]   66001ns - Write32 PULP TAP
+# [JTAG]  130501ns - R/W test of L2 succeeded
+# [TB  ]  176201ns - Halting the Core
+# [TB  ]  235001ns - Writing the boot address into dpc
+# [TB  ]  279101ns - Loading L2 via JTAG
+# [JTAG]  279101ns - Loading L2 with pulp tap jtag interface
+# [PULP] 1110801ns - WRITE32 burst @1c000000 for        1024 bytes.
+# [PULP] 1940901ns - WRITE32 burst @1c000400 for        1024 bytes.
+# [PULP] 2617401ns - WRITE32 burst @1c000800 for         832 bytes.
+# [PULP] 3447501ns - WRITE32 burst @1c008000 for        1024 bytes.
+# [PULP] 4277601ns - WRITE32 burst @1c008400 for        1024 bytes.
+# [PULP] 5107701ns - WRITE32 burst @1c008800 for        1024 bytes.
+# [PULP] 5937801ns - WRITE32 burst @1c008c00 for        1024 bytes.
+# [PULP] 6767901ns - WRITE32 burst @1c009000 for        1024 bytes.
+# [PULP] 7598001ns - WRITE32 burst @1c009400 for        1024 bytes.
+# [PULP] 7628101ns - WRITE32 burst @1c009800 for          24 bytes.
+# [TB  ] 7629701ns - Resuming the CORE
+# [TB  ] 8203201ns - retrying debug reg access
+# [TB  ] 8232501ns - retrying debug reg access
+# [TB  ] 8261801ns - retrying debug reg access
+# [TB  ] 8291101ns - retrying debug reg access
+# [TB  ] 8320401ns - retrying debug reg access
+# [TB  ] 8349701ns - retrying debug reg access
+# [TB  ] 8379001ns - retrying debug reg access
+# [TB  ] 8408301ns - retrying debug reg access
+# [TB  ] 8437601ns - retrying debug reg access
+# [TB  ] 8466901ns - retrying debug reg access
+# [TB  ] 8496201ns - retrying debug reg access
+# [TB  ] 8525501ns - retrying debug reg access
+# [TB  ] 8554801ns - retrying debug reg access
+# [STDOUT-CL31_PE0, 8558066ns] Performance counters:
+# [STDOUT-CL31_PE0, 8560916ns] Low halves:
+# [STDOUT-CL31_PE0, 8576215ns] ==========================================================================
+# [TB  ] 8598801ns - Waiting for end of computation
+# [STDOUT-CL31_PE0, 8602261ns] MCYCLE       =         76
+# [STDOUT-CL31_PE0, 8628842ns] MINSTR       =         59
+# [STDOUT-CL31_PE0, 8653918ns] LD_STALL     =          0
+# [STDOUT-CL31_PE0, 8678975ns] JR_STALL     =          0
+# [STDOUT-CL31_PE0, 8704052ns] IMISS        =          0
+# [STDOUT-CL31_PE0, 8729108ns] LD           =          4
+# [STDOUT-CL31_PE0, 8754185ns] ST           =          4
+# [STDOUT-CL31_PE0, 8779241ns] JUMP         =          3
+# [STDOUT-CL31_PE0, 8804318ns] BRANCH       =          0
+# [STDOUT-CL31_PE0, 8829375ns] BR_TAKEN     =          0
+# [STDOUT-CL31_PE0, 8855975ns] COMP_INSTR   =         32
+# [STDOUT-CL31_PE0, 8871868ns] ==========================================================================
+# [TB  ] 9010501ns - Received status core: 0x00000000
+# ** Note: $stop    : /home/ICer/Desktop/ref/pulpissimo/target/sim/tb/tb_pulp.sv(822)
+#    Time: 9010501 ns  Iteration: 0  Instance: /tb_pulp
+# Break in Module tb_pulp at /home/ICer/Desktop/ref/pulpissimo/target/sim/tb/tb_pulp.sv line 822
+# Stopped at /home/ICer/Desktop/ref/pulpissimo/target/sim/tb/tb_pulp.sv line 822
+# End time: 00:19:13 on May 09,2025, Elapsed time: 0:01:45
+# Errors: 0, Warnings: 15
